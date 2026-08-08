@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Стиралка Alazana</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f2f4f7;
+      color: #111827;
+    }
+
+    .wrap {
+      max-width: 600px;
+      margin: auto;
+      padding: 24px 16px 50px;
+    }
+
+    h1 { font-size: 34px; }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.06);
+    }
+
+    #status {
+      font-size: 30px;
+      font-weight: 800;
+      color: #059669;
+      margin-bottom: 22px;
+    }
+
+    #status.busy { color: #dc2626; }
+
+    label {
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 16px 0 8px;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      font-size: 18px;
+    }
+
+    select {
+      background: white;
+      border: 2px solid #d1d5db;
+    }
+
+    button {
+      margin-top: 18px;
+      border: 0;
+      background: #111827;
+      color: white;
+      font-weight: 800;
+    }
+
+    #timer {
+      font-size: 42px;
+      font-weight: 800;
+      text-align: center;
+      margin: 18px 0;
+    }
+
+    .hidden { display: none; }
+
+    #queue div, #history div {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <h1>Стиралка</h1>
+
+  <div class="card">
+    <div id="status">● СВОБОДНА</div>
+
+    <div id="current" class="hidden">
+      <div id="currentUser"></div>
+      <div id="timer">00:00</div>
+    </div>
+
+    <label>Кто стирает?</label>
+    <select id="user">
+      <option value="">Выбрать имя</option>
+      <option>Александр</option>
+      <option>Анечка</option>
+      <option>Ваня</option>
+      <option>Виктор</option>
+      <option>Дима</option>
+      <option>Коля</option>
+      <option>Леся</option>
+      <option>Юра</option>
+      <option>Каспер</option>
+    </select>
+
+    <label>На сколько?</label>
+    <select id="minutes">
+      <option value="15">15 минут</option>
+      <option value="30">30 минут</option>
+      <option value="45">45 минут</option>
+      <option value="60">1 час</option>
+      <option value="90">1 час 30 минут</option>
+      <option value="120">2 часа</option>
+    </select>
+
+    <button id="start">Начать стирку</button>
+  </div>
+
+  <div class="card">
+    <h2>Очередь</h2>
+
+    <select id="queueUser">
+      <option value="">Выбрать имя</option>
+      <option>Александр</option>
+      <option>Анечка</option>
+      <option>Ваня</option>
+      <option>Виктор</option>
+      <option>Дима</option>
+      <option>Коля</option>
+      <option>Леся</option>
+      <option>Юра</option>
+      <option>Каспер</option>
+    </select>
+
+    <button id="joinQueue">Встать в очередь</button>
+    <div id="queue"></div>
+  </div>
+
+  <div class="card">
+    <h2>Последние стирки</h2>
+    <div id="history">Пока стирок нет</div>
+  </div>
+
+</div>
+
+<script type="module">
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  set,
+  push,
+  onValue,
+  remove
+} from
+"https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAzUWlWuqwKFwhSpBhC8rvH-_U23HH73D0",
+  authDomain: "stiralka-alazana.firebaseapp.com",
+  databaseURL: "https://stiralka-alazana-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "stiralka-alazana",
+  storageBucket: "stiralka-alazana.firebasestorage.app",
+  messagingSenderId: "583128021865",
+  appId: "1:583128021865:web:45a2c120d330ecce9edbf8"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const machineRef = ref(db, "machine");
+const queueRef = ref(db, "queue");
+const historyRef = ref(db, "history");
+
+document.getElementById("start").onclick = async () => {
+  const name = document.getElementById("user").value;
+  const minutes = Number(document.getElementById("minutes").value);
+
+  if (!name) {
+    alert("Выбери имя");
+    return;
+  }
+
+  const endTime = Date.now() + minutes * 60000;
+
+  await set(machineRef, {
+    user: name,
+    endTime: endTime
+  });
+};
+
+document.getElementById("joinQueue").onclick = async () => {
+  const name = document.getElementById("queueUser").value;
+
+  if (!name) {
+    alert("Выбери имя");
+    return;
+  }
+
+  await push(queueRef, {
+    user: name,
+    time: Date.now()
+  });
+};
+
+let currentMachine = null;
+
+onValue(machineRef, snapshot => {
+  currentMachine = snapshot.val();
+  renderMachine();
+});
+
+function renderMachine() {
+  const status = document.getElementById("status");
+  const current = document.getElementById("current");
+  const currentUser = document.getElementById("currentUser");
+
+  if (!currentMachine || currentMachine.endTime <= Date.now()) {
+    status.textContent = "● СВОБОДНА";
+    status.classList.remove("busy");
+    current.classList.add("hidden");
+
+    if (currentMachine) finishWash(currentMachine);
+
+    return;
+  }
+
+  status.textContent = "● ЗАНЯТА";
+  status.classList.add("busy");
+  current.classList.remove("hidden");
+  currentUser.textContent = "Стирает: " + currentMachine.user;
+
+  updateTimer();
+}
+
+function updateTimer() {
+  if (!currentMachine) return;
+
+  const remaining = currentMachine.endTime - Date.now();
+
+  if (remaining <= 0) {
+    renderMachine();
+    return;
+  }
+
+  const totalSeconds = Math.floor(remaining / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  document.getElementById("timer").textContent =
+    String(minutes).padStart(2,"0") + ":" +
+    String(seconds).padStart(2,"0");
+}
+
+setInterval(updateTimer, 1000);
+
+let finishing = false;
+
+async function finishWash(wash) {
+  if (finishing) return;
+  finishing = true;
+
+  await push(historyRef, {
+    user: wash.user,
+    finished: Date.now()
+  });
+
+  await remove(machineRef);
+
+  finishing = false;
+}
+
+onValue(queueRef, snapshot => {
+  const queue = document.getElementById("queue");
+  queue.innerHTML = "";
+
+  const data = snapshot.val();
+
+  if (!data) {
+    queue.innerHTML = "<p>Очередь пустая</p>";
+    return;
+  }
+
+  Object.values(data)
+    .sort((a,b) => a.time - b.time)
+    .forEach((item, i) => {
+      const div = document.createElement("div");
+      div.textContent = (i + 1) + ". " + item.user;
+      queue.appendChild(div);
+    });
+});
+
+onValue(historyRef, snapshot => {
+  const history = document.getElementById("history");
+  const data = snapshot.val();
+
+  if (!data) {
+    history.textContent = "Пока стирок нет";
+    return;
+  }
+
+  const items = Object.values(data)
+    .sort((a,b) => b.finished - a.finished)
+    .slice(0, 10);
+
+  history.innerHTML = "";
+
+  items.forEach(item => {
+    const div = document.createElement("div");
+    const date = new Date(item.finished);
+
+    div.textContent =
+      item.user + " — " +
+      date.toLocaleString("ru-RU");
+
+    history.appendChild(div);
+  });
+});
+</script>
+
+</body>
+</html>
