@@ -2,334 +2,555 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#09090b">
-<title>Стиралка 5.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eaf8ff">
+<title>Стиралка Fresh 6.0</title>
 
 <style>
 :root{
-  --bg:#09090b;
-  --card:#151518;
-  --card2:#1c1c21;
-  --text:#fafafa;
-  --muted:#9898a2;
-  --green:#22c55e;
-  --red:#ef4444;
-  --orange:#f59e0b;
-  --blue:#3b82f6;
-  --purple:#8b5cf6;
-  --border:rgba(255,255,255,.08);
+  --blue:#35a7ff;
+  --blue2:#6fc8ff;
+  --deep:#0876c9;
+  --ice:#eaf8ff;
+  --white:#ffffff;
+  --ink:#16324a;
+  --muted:#6b8aa0;
+  --green:#19b66d;
+  --red:#ef5350;
+  --orange:#ff9f43;
+  --border:rgba(42,145,210,.15);
+  --shadow:0 18px 50px rgba(69,155,210,.15);
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  min-height:100%;
+}
 
 body{
-  margin:0;
-  background:
-    radial-gradient(circle at 50% -10%,#27273a 0,transparent 35%),
-    var(--bg);
-  color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
-  min-height:100vh;
+  color:var(--ink);
+
+  background:
+    radial-gradient(circle at 15% 5%, rgba(255,255,255,.98), transparent 30%),
+    radial-gradient(circle at 85% 12%, rgba(185,232,255,.9), transparent 34%),
+    linear-gradient(180deg,#e9f8ff 0%,#f8fdff 50%,#edfaff 100%);
+
+  overflow-x:hidden;
+}
+
+.sky{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:-1;
+}
+
+.cloud{
+  position:absolute;
+  color:white;
+  opacity:.55;
+  filter:blur(.2px);
+  animation:cloudMove linear infinite;
+}
+
+.cloud.one{
+  top:7%;
+  left:-100px;
+  font-size:72px;
+  animation-duration:28s;
+}
+
+.cloud.two{
+  top:31%;
+  left:-150px;
+  font-size:48px;
+  animation-duration:38s;
+  animation-delay:-15s;
+}
+
+.cloud.three{
+  top:67%;
+  left:-180px;
+  font-size:62px;
+  animation-duration:44s;
+  animation-delay:-8s;
+}
+
+@keyframes cloudMove{
+  from{transform:translateX(-160px)}
+  to{transform:translateX(calc(100vw + 260px))}
 }
 
 .wrap{
   width:min(680px,100%);
   margin:auto;
-  padding:22px 15px 70px;
+  padding:20px 15px 70px;
 }
 
 .header{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin:8px 3px 22px;
+  justify-content:space-between;
+  padding:4px 3px 17px;
 }
 
 .logo{
-  font-size:31px;
-  font-weight:900;
+  font-size:29px;
+  font-weight:950;
   letter-spacing:-1px;
+  color:#0b629d;
 }
 
 .version{
-  font-size:12px;
+  font-size:11px;
+  font-weight:850;
+  letter-spacing:.6px;
   padding:7px 10px;
   border-radius:99px;
-  background:rgba(139,92,246,.15);
-  color:#c4b5fd;
-  border:1px solid rgba(139,92,246,.3);
+  color:#1683c7;
+  background:rgba(255,255,255,.7);
+  border:1px solid rgba(61,173,238,.2);
+  backdrop-filter:blur(12px);
 }
 
 .card{
   position:relative;
   overflow:hidden;
-  background:linear-gradient(145deg,#18181c,#111114);
-  border:1px solid var(--border);
-  border-radius:27px;
+  border-radius:28px;
   padding:21px;
   margin-bottom:15px;
+
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.93),rgba(241,251,255,.82));
+
+  border:1px solid rgba(255,255,255,.95);
+
   box-shadow:
-    0 20px 60px rgba(0,0,0,.28),
-    inset 0 1px rgba(255,255,255,.03);
+    var(--shadow),
+    inset 0 1px rgba(255,255,255,1);
+
+  backdrop-filter:blur(18px);
+}
+
+.card:before{
+  content:"";
+  position:absolute;
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  background:rgba(113,204,255,.12);
+  top:-80px;
+  right:-60px;
 }
 
 .status{
+  position:relative;
+  z-index:2;
   display:flex;
   align-items:center;
   gap:9px;
   font-size:14px;
-  font-weight:800;
+  font-weight:900;
   letter-spacing:.8px;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 
 .dot{
-  width:9px;
-  height:9px;
+  width:10px;
+  height:10px;
   border-radius:50%;
   background:var(--green);
-  box-shadow:0 0 15px var(--green);
+  box-shadow:0 0 16px rgba(25,182,109,.55);
 }
 
 .busy .dot{
   background:var(--red);
-  box-shadow:0 0 15px var(--red);
+  box-shadow:0 0 16px rgba(239,83,80,.5);
 }
 
-.busyText{color:#f87171}
-.freeText{color:#4ade80}
+.freeText{color:var(--green)}
+.busyText{color:var(--red)}
 
 .machine-area{
   display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:4px 0 5px;
+  justify-content:center;
+  padding:4px 0 9px;
 }
 
 .machine{
-  width:170px;
-  height:170px;
   position:relative;
+  width:190px;
+  height:190px;
   display:flex;
-  align-items:center;
   justify-content:center;
-  margin:3px auto 7px;
+  align-items:center;
 }
 
-.ring{
+.progressRing{
   position:absolute;
   inset:0;
   border-radius:50%;
+
   background:
     conic-gradient(
-      var(--purple) calc(var(--progress,0) * 1%),
-      rgba(255,255,255,.07) 0
+      #42baff calc(var(--progress,0) * 1%),
+      rgba(77,174,230,.13) 0
     );
-  transition:background .8s linear;
+
+  box-shadow:
+    0 12px 40px rgba(51,166,230,.16);
+
+  transition:background .7s linear;
 }
 
-.ring:after{
+.progressRing:after{
   content:"";
   position:absolute;
-  inset:9px;
-  background:#111114;
+  inset:10px;
   border-radius:50%;
+
+  background:
+    linear-gradient(145deg,#f9feff,#e4f7ff);
+
+  box-shadow:
+    inset 0 0 25px rgba(64,174,235,.1);
 }
 
 .drum{
+  position:relative;
   z-index:2;
-  width:128px;
-  height:128px;
+  width:142px;
+  height:142px;
   border-radius:50%;
+
+  overflow:hidden;
+
+  border:8px solid rgba(94,194,246,.32);
+
   background:
-    radial-gradient(circle at 35% 28%,#3f3f46,#111 56%,#060606);
-  border:7px solid #303038;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    radial-gradient(circle at 32% 25%,#d9f5ff 0,#86d7ff 36%,#279bd6 72%,#1172ad 100%);
+
   box-shadow:
-    inset 0 0 24px #000,
-    0 0 35px rgba(139,92,246,.08);
+    inset 0 0 22px rgba(4,78,123,.22),
+    0 10px 32px rgba(55,166,225,.2);
 }
 
-.drum.spinning{
-  animation:spin 4s linear infinite;
+.water{
+  position:absolute;
+  left:-10%;
+  bottom:-18%;
+  width:120%;
+  height:57%;
+  border-radius:45% 55% 30% 30%;
+
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.5),rgba(92,202,255,.78));
+
+  animation:waterWave 3.5s ease-in-out infinite;
+}
+
+@keyframes waterWave{
+  0%,100%{transform:rotate(-3deg) translateY(0)}
+  50%{transform:rotate(4deg) translateY(-4px)}
+}
+
+.clothes{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:31px;
+}
+
+.clothes.spinning{
+  animation:clothesSpin 4.2s linear infinite;
+}
+
+@keyframes clothesSpin{
+  to{transform:rotate(360deg)}
+}
+
+.item{
+  position:absolute;
+  filter:drop-shadow(0 4px 5px rgba(0,70,110,.12));
+}
+
+.item.shirt{
+  transform:translate(-26px,-28px) rotate(-15deg);
+}
+
+.item.underwear{
+  transform:translate(31px,-3px) rotate(18deg);
+}
+
+.item.sock{
+  transform:translate(-14px,35px) rotate(10deg);
+}
+
+.item.towel{
+  transform:translate(29px,38px) rotate(-20deg);
+  font-size:24px;
 }
 
 .bubble{
   position:absolute;
   border-radius:50%;
-  background:rgba(255,255,255,.12);
+  background:rgba(255,255,255,.72);
+  animation:bubbleUp 3.4s ease-in infinite;
 }
 
-.b1{width:18px;height:18px;left:28px;top:30px}
-.b2{width:11px;height:11px;right:33px;top:51px}
-.b3{width:24px;height:24px;right:45px;bottom:23px}
-.b4{width:13px;height:13px;left:38px;bottom:31px}
-
-@keyframes spin{
-  to{transform:rotate(360deg)}
+.bubble.b1{
+  width:13px;height:13px;
+  left:21px;bottom:15px;
 }
 
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.025)}
+.bubble.b2{
+  width:8px;height:8px;
+  left:52px;bottom:4px;
+  animation-delay:-1.2s;
 }
 
-@keyframes pop{
-  from{opacity:0;transform:translateY(10px) scale(.96)}
-  to{opacity:1;transform:none}
+.bubble.b3{
+  width:17px;height:17px;
+  right:24px;bottom:12px;
+  animation-delay:-2s;
 }
 
-@keyframes shine{
-  from{background-position:-200% center}
-  to{background-position:200% center}
+.bubble.b4{
+  width:9px;height:9px;
+  right:53px;bottom:0;
+  animation-delay:-.7s;
 }
 
-.user-title{
-  font-size:23px;
-  font-weight:900;
+@keyframes bubbleUp{
+  from{
+    opacity:0;
+    transform:translateY(20px) scale(.7);
+  }
+  30%{opacity:.8}
+  to{
+    opacity:0;
+    transform:translateY(-110px) scale(1.15);
+  }
+}
+
+.userTitle{
   text-align:center;
+  font-size:22px;
+  font-weight:950;
   letter-spacing:-.4px;
+  color:#0a669f;
 }
 
 .timer{
-  font-size:45px;
-  font-weight:950;
   text-align:center;
-  font-variant-numeric:tabular-nums;
-  margin:3px 0 5px;
+  font-size:49px;
+  font-weight:950;
   letter-spacing:-1px;
+  font-variant-numeric:tabular-nums;
+  color:#123f5e;
+  margin:4px 0;
 }
 
-.progress-caption{
-  color:var(--muted);
+.progressText{
   text-align:center;
+  color:var(--muted);
   font-size:13px;
-  margin-bottom:13px;
+  margin-bottom:12px;
 }
 
 .speech{
-  background:linear-gradient(145deg,#222229,#18181d);
-  border:1px solid var(--border);
   min-height:73px;
-  border-radius:19px;
   padding:14px 16px;
+  border-radius:19px;
+
   display:flex;
   justify-content:center;
   align-items:center;
+
   text-align:center;
   line-height:1.4;
   font-size:16px;
-  animation:pop .3s ease;
+
+  color:#23658c;
+
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.92),rgba(222,246,255,.86));
+
+  border:1px solid rgba(83,187,241,.19);
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,1);
+
+  animation:speechPop .35s ease;
+}
+
+@keyframes speechPop{
+  from{
+    opacity:0;
+    transform:translateY(6px) scale(.98);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
 }
 
 .speech.final{
-  border-color:rgba(245,158,11,.45);
-  background:linear-gradient(145deg,#2b2111,#191713);
+  color:#976011;
+  background:linear-gradient(145deg,#fffaf0,#fff1d7);
+  border-color:rgba(255,170,44,.3);
 }
 
 .speech.panic{
-  border-color:rgba(239,68,68,.5);
-  background:linear-gradient(145deg,#351515,#1c1212);
-  animation:pulse 1s infinite;
+  color:#bc3c39;
+  background:linear-gradient(145deg,#fff6f5,#ffe7e5);
+  border-color:rgba(239,83,80,.28);
+  animation:softPulse 1.25s infinite;
+}
+
+@keyframes softPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.015)}
+}
+
+label{
+  display:block;
+  margin:16px 0 7px;
+  font-size:14px;
+  font-weight:800;
+  color:#51778e;
 }
 
 select,button{
   width:100%;
   font:inherit;
-  border-radius:16px;
+  border-radius:17px;
 }
 
 select{
-  color:var(--text);
-  background:#202026;
-  border:1px solid var(--border);
+  appearance:none;
   padding:14px;
-  outline:none;
-}
+  color:#174968;
 
-label{
-  display:block;
-  color:#d4d4d8;
-  font-size:14px;
-  font-weight:700;
-  margin:16px 0 7px;
+  background:
+    linear-gradient(145deg,#fff,#f0faff);
+
+  border:1px solid rgba(61,173,238,.2);
+
+  outline:none;
 }
 
 button{
   border:none;
   padding:15px;
-  font-weight:850;
   margin-top:12px;
+
+  font-weight:900;
   color:white;
-  background:linear-gradient(135deg,#7c3aed,#4f46e5);
-  box-shadow:0 8px 25px rgba(79,70,229,.25);
+
+  background:
+    linear-gradient(135deg,#54c5ff,#168ddd);
+
+  box-shadow:
+    0 10px 25px rgba(42,159,224,.22);
 }
 
-button:active{transform:scale(.98)}
+button:active{
+  transform:scale(.985);
+}
 
 .stop{
-  background:linear-gradient(135deg,#dc2626,#991b1b);
-  box-shadow:0 8px 25px rgba(220,38,38,.18);
+  background:
+    linear-gradient(135deg,#ff7771,#e54743);
+
+  box-shadow:
+    0 10px 25px rgba(228,71,67,.18);
+}
+
+.stopLocked{
+  color:#7391a3;
+  background:#edf6fa;
+  box-shadow:none;
+  border:1px solid #d5eaf4;
 }
 
 .queueBtn{
-  background:linear-gradient(135deg,#2563eb,#4338ca);
+  background:
+    linear-gradient(135deg,#6dcaff,#338ee6);
 }
 
-.hidden{display:none!important}
-
-.section-title{
+.sectionTitle{
+  position:relative;
+  z-index:2;
   font-size:19px;
-  font-weight:850;
-  margin-bottom:14px;
+  font-weight:900;
+  color:#155e89;
+  margin-bottom:13px;
 }
 
-.queueComment{
-  color:#a1a1aa;
-  text-align:center;
-  font-size:14px;
-  margin:13px 0 4px;
+.hidden{
+  display:none!important;
 }
 
 .row{
   padding:12px 2px;
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid rgba(48,151,210,.1);
 }
 
-.row:last-child{border-bottom:none}
+.row:last-child{
+  border-bottom:none;
+}
 
-.queueRow{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.muted{
+  color:#7d9bad;
+  font-size:13px;
+}
+
+.queueComment{
+  text-align:center;
+  color:#6f91a5;
+  font-size:14px;
+  padding:12px 0 2px;
 }
 
 .position{
   display:inline-flex;
   justify-content:center;
   align-items:center;
-  width:27px;
-  height:27px;
-  border-radius:9px;
-  background:#27272a;
+
+  width:28px;
+  height:28px;
+  border-radius:10px;
+
   margin-right:8px;
+
   font-size:13px;
-  font-weight:800;
+  font-weight:900;
+
+  color:#1973aa;
+  background:#e4f6ff;
 }
 
-.muted{
-  color:var(--muted);
-  font-size:13px;
+.queueRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
 .leader{
   display:grid;
   grid-template-columns:42px 1fr auto;
-  align-items:center;
   gap:10px;
+  align-items:center;
 }
 
 .rank{
@@ -338,103 +559,100 @@ button:active{transform:scale(.98)}
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#242429;
-  border-radius:13px;
+
+  border-radius:14px;
+
   font-weight:900;
+
+  color:#1472aa;
+  background:#e2f5ff;
 }
 
 .rank.first{
-  background:linear-gradient(145deg,#713f12,#a16207);
+  background:linear-gradient(145deg,#fff2a8,#ffc956);
+  color:#9b6300;
 }
 
 .leaderName{
-  font-weight:820;
+  font-weight:900;
+  color:#145b83;
 }
 
 .points{
-  color:#c4b5fd;
-  font-weight:850;
+  font-weight:900;
+  color:#168dcc;
 }
 
 .badge{
   display:inline-block;
-  background:#28282e;
-  border:1px solid var(--border);
-  border-radius:99px;
-  padding:5px 9px;
+
   margin-top:5px;
-  color:#d4d4d8;
+  padding:5px 9px;
+
+  border-radius:99px;
+
   font-size:11px;
-}
+  font-weight:800;
 
-.award-card{
-  border:1px solid rgba(245,158,11,.25);
-  background:
-    radial-gradient(circle at top right,rgba(245,158,11,.12),transparent 45%),
-    #171719;
-}
-
-.award-big{
-  font-size:42px;
-  text-align:center;
-  margin-bottom:5px;
-}
-
-.award-name{
-  font-size:20px;
-  text-align:center;
-  font-weight:900;
-}
-
-.award-desc{
-  text-align:center;
-  color:#a1a1aa;
-  line-height:1.4;
-  margin-top:7px;
+  color:#31779d;
+  background:#ebf8ff;
+  border:1px solid rgba(68,176,232,.14);
 }
 
 .levelbar{
-  background:#29292e;
   height:7px;
   overflow:hidden;
   border-radius:99px;
-  margin-top:13px;
+  background:#e2f3fa;
+  margin-top:9px;
 }
 
-.levelbar>div{
+.levelbar div{
   height:100%;
-  background:linear-gradient(90deg,#7c3aed,#f59e0b);
   border-radius:99px;
-}
-
-.superboss{
   background:
-    linear-gradient(90deg,#fde68a,#f97316,#d946ef,#8b5cf6,#fde68a);
-  background-size:200%;
-  -webkit-background-clip:text;
-  color:transparent;
-  animation:shine 3s linear infinite;
+    linear-gradient(90deg,#56c8ff,#0d91de);
 }
 
 .notice{
-  color:#a1a1aa;
-  font-size:12px;
   text-align:center;
-  margin-top:13px;
+  margin-top:11px;
+  font-size:12px;
+  color:#87a4b4;
 }
 
-.confetti{
+.award{
+  text-align:center;
+}
+
+.awardEmoji{
+  font-size:43px;
+}
+
+.awardName{
+  font-size:20px;
+  font-weight:950;
+  color:#12618d;
+}
+
+.awardDesc{
+  margin-top:7px;
+  color:#7191a4;
+  line-height:1.4;
+}
+
+.freshBurst{
   position:fixed;
-  top:-20px;
   z-index:9999;
+  top:-30px;
   pointer-events:none;
-  animation:fall 2.8s linear forwards;
+  animation:burstFall 3.2s linear forwards;
 }
 
-@keyframes fall{
+@keyframes burstFall{
   to{
-    transform:translateY(110vh) rotate(720deg);
-    opacity:.8;
+    transform:translateY(110vh) rotate(540deg);
+    opacity:.7;
   }
 }
 </style>
@@ -442,121 +660,66 @@ button:active{transform:scale(.98)}
 
 <body>
 
+<div class="sky">
+  <div class="cloud one">☁️</div>
+  <div class="cloud two">☁️</div>
+  <div class="cloud three">☁️</div>
+</div>
+
 <div class="wrap">
 
 <div class="header">
-  <div class="logo">🧺 Стиралка</div>
-  <div class="version">CIRCUS 5.0</div>
-</div>
-
-
-<div class="card" id="mainCard">
-
-  <div id="statusBox" class="status">
-    <span class="dot"></span>
-    <span id="status" class="freeText">СВОБОДНА</span>
-  </div>
-
-  <div class="machine-area">
-
-    <div class="machine">
-      <div id="ring" class="ring"></div>
-
-      <div id="drum" class="drum">
-        <div class="bubble b1"></div>
-        <div class="bubble b2"></div>
-        <div class="bubble b3"></div>
-        <div class="bubble b4"></div>
-        <div style="font-size:38px">🫧</div>
-      </div>
-    </div>
-
-  </div>
-
-  <div id="freeArea">
-
-    <div id="freeMessage" class="speech"></div>
-
-    <label>Кто решился?</label>
-
-    <select id="user">
-      <option value="">Выбрать имя</option>
-      <option>Александр</option>
-      <option>Анечка</option>
-      <option>Наталия</option>
-      <option>Ваня</option>
-      <option>Виктор</option>
-      <option>Дима</option>
-      <option>Коля</option>
-      <option>Леся</option>
-      <option>Суримай</option>
-      <option>Юра</option>
-      <option>Каспер</option>
-    </select>
-
-    <label>Сколько мучаем барабан?</label>
-
-    <select id="minutes">
-      <option value="15">15 минут</option>
-      <option value="30">30 минут</option>
-      <option value="45">45 минут</option>
-      <option value="60" selected>1 час</option>
-      <option value="90">1 час 30 минут</option>
-      <option value="120">2 часа</option>
-    </select>
-
-    <button id="startWash">
-      ЗАПУСТИТЬ ВЕЛИКОЕ ВРАЩЕНИЕ 🌀
-    </button>
-
-    <div class="notice">
-      Новые стирки запускаются только до 23:00.
-    </div>
-
-  </div>
-
-
-  <div id="busyArea" class="hidden">
-
-    <div id="currentUser" class="user-title"></div>
-
-    <div id="timer" class="timer">00:00</div>
-
-    <div id="progressCaption" class="progress-caption"></div>
-
-    <div id="washMessage" class="speech"></div>
-
-    <button id="stopWash" class="stop">
-      ⏹ ЗАКОНЧИТЬ СТИРКУ
-    </button>
-
-  </div>
-
-</div>
-
-
-<div id="awardCard" class="card award-card hidden">
-
-  <div class="section-title">
-    🎁 Последняя разблокированная награда
-  </div>
-
-  <div id="awardEmoji" class="award-big">🏆</div>
-
-  <div id="awardName" class="award-name"></div>
-
-  <div id="awardDesc" class="award-desc"></div>
-
+  <div class="logo">🫧 Стиралка</div>
+  <div class="version">FRESH 6.0</div>
 </div>
 
 
 <div class="card">
 
-  <div class="section-title">
-    👥 Очередь желающих стать чище
+<div id="statusBox" class="status">
+  <span class="dot"></span>
+  <span id="status" class="freeText">СВОБОДНА</span>
+</div>
+
+
+<div class="machine-area">
+
+  <div class="machine">
+
+    <div id="ring" class="progressRing"></div>
+
+    <div class="drum">
+
+      <div class="water"></div>
+
+      <div id="clothes" class="clothes">
+
+        <span class="item shirt">👕</span>
+        <span class="item underwear">🩲</span>
+        <span class="item sock">🧦</span>
+        <span class="item towel">🧣</span>
+
+      </div>
+
+      <span class="bubble b1"></span>
+      <span class="bubble b2"></span>
+      <span class="bubble b3"></span>
+      <span class="bubble b4"></span>
+
+    </div>
+
   </div>
 
-  <select id="queueUser">
+</div>
+
+
+<div id="freeArea">
+
+  <div id="freeMessage" class="speech"></div>
+
+  <label>Кто сегодня становится чище?</label>
+
+  <select id="user">
     <option value="">Выбрать имя</option>
     <option>Александр</option>
     <option>Анечка</option>
@@ -571,34 +734,120 @@ button:active{transform:scale(.98)}
     <option>Каспер</option>
   </select>
 
-  <button id="joinQueue" class="queueBtn">
-    ➕ ВСТАТЬ В ОЧЕРЕДЬ
+  <label>На сколько запускаем великое очищение?</label>
+
+  <select id="minutes">
+    <option value="15">15 минут</option>
+    <option value="30">30 минут</option>
+    <option value="45">45 минут</option>
+    <option value="60" selected>1 час</option>
+    <option value="90">1 час 30 минут</option>
+    <option value="120">2 часа</option>
+  </select>
+
+  <button id="startWash">
+    🫧 ЗАПУСТИТЬ СТИРКУ
   </button>
 
-  <div id="queueComment" class="queueComment"></div>
-  <div id="queue"></div>
+  <div class="notice">
+    Новые стирки должны закончиться до 23:00.
+  </div>
+
+</div>
+
+
+<div id="busyArea" class="hidden">
+
+  <div id="currentUser" class="userTitle"></div>
+
+  <div id="timer" class="timer">00:00</div>
+
+  <div id="progressText" class="progressText"></div>
+
+  <div id="washMessage" class="speech"></div>
+
+  <button id="stopWash" class="stop hidden">
+    ⏹ Я ЗАКОНЧИЛ СТИРКУ
+  </button>
+
+  <button id="foreignWash" class="stopLocked hidden" disabled>
+    🔒 Остановить может только тот, кто запустил
+  </button>
+
+</div>
+
+</div>
+
+
+<div id="awardCard" class="card hidden">
+
+  <div class="sectionTitle">
+    🎁 Свежая награда
+  </div>
+
+  <div class="award">
+
+    <div id="awardEmoji" class="awardEmoji"></div>
+
+    <div id="awardName" class="awardName"></div>
+
+    <div id="awardDesc" class="awardDesc"></div>
+
+  </div>
 
 </div>
 
 
 <div class="card">
 
-  <div class="section-title">
-    🏆 Зал славы
-  </div>
+<div class="sectionTitle">
+  👥 Очередь на очищение
+</div>
 
-  <div id="leaders"></div>
+<select id="queueUser">
+  <option value="">Выбрать имя</option>
+  <option>Александр</option>
+  <option>Анечка</option>
+  <option>Наталия</option>
+  <option>Ваня</option>
+  <option>Виктор</option>
+  <option>Дима</option>
+  <option>Коля</option>
+  <option>Леся</option>
+  <option>Суримай</option>
+  <option>Юра</option>
+  <option>Каспер</option>
+</select>
+
+<button id="joinQueue" class="queueBtn">
+  ➕ ВСТАТЬ В ОЧЕРЕДЬ
+</button>
+
+<div id="queueComment" class="queueComment"></div>
+
+<div id="queue"></div>
 
 </div>
 
 
 <div class="card">
 
-  <div class="section-title">
-    📜 Хроники барабана
-  </div>
+<div class="sectionTitle">
+  🏆 Зал свежей славы
+</div>
 
-  <div id="history"></div>
+<div id="leaders"></div>
+
+</div>
+
+
+<div class="card">
+
+<div class="sectionTitle">
+  📜 Хроники барабана
+</div>
+
+<div id="history"></div>
 
 </div>
 
@@ -642,231 +891,253 @@ const historyRef = ref(db,"history");
 const lastAwardRef = ref(db,"lastAward");
 
 
-/* ==========================================
-   РЕПЛИКИ СВОБОДНОЙ СТИРАЛКИ
-========================================== */
+/* ====================================
+   ИДЕНТИФИКАТОР УСТРОЙСТВА
+==================================== */
+
+let deviceId = localStorage.getItem("stiralkaDeviceId");
+
+if(!deviceId){
+
+  deviceId =
+    "device_" +
+    Date.now() +
+    "_" +
+    Math.random()
+      .toString(36)
+      .slice(2);
+
+  localStorage.setItem(
+    "stiralkaDeviceId",
+    deviceId
+  );
+
+}
+
+
+/* ====================================
+   СВОБОДНА
+==================================== */
 
 const freePhrases = [
 
-"Я свободна. Это не статус отношений. Это предложение постирать 🧺",
-"Стою пустая. Молодая. Перспективная. Барабан без обязательств.",
-"У кого носки уже способны самостоятельно покинуть комнату? 👀",
-"Мне скучно. Принесите грязи.",
-"Постирай меня. Я буквально проходила собеседование ради этого.",
-"Машинка свободна. Учёные подтверждают: такое бывает.",
-"Ваши носки заслуживают ещё один шанс.",
-"Первый успевший получает чистое бельё. Возможно даже всё.",
-"Есть окно! Отдел логистики подтверждает.",
-"Стиралка простаивает. Экономика коллектива падает.",
-"Ваш выход, грязные костюмы 🎪",
-"Дайте мне хотя бы полотенце. Я начинаю терять квалификацию.",
-"Барабан пуст. Это противоречит природе.",
-"Пока свободна. Конкуренты уже могут читать это сообщение.",
-"Если ты ждал знак — вот он: 🧺",
-"Могу стирать. Могу стоять. Но зачем нам обоим wasting time?",
-"Требуется человек с грязным бельём. Опыт не обязателен.",
-"Порошок готов. Вода готова. Артист пропал.",
-"Давай, загружай. Я видела носки и похуже.",
-"Сегодня отличный день, чтобы наконец постирать ЭТО.",
-"СВОБОДНА. Пока кто-то другой не понял, что тоже хотел стирать.",
-"Барабан пуст. Сердце тоже.",
-"Ваше бельё просило передать, что пора.",
-"Машинка свободна. Совет директоров рекомендует действовать.",
-"Только сейчас: ноль минут ожидания.",
-"У меня сегодня ни одной стирки. Начинаю сомневаться в себе.",
-"Принимаю бельё без предварительной записи.",
-"Кто сегодня станет героем свежести?",
-"Я готова. А морально готов ли ты?",
-"Очереди нет. Судьба буквально подталкивает тебя."
+"Я свободна. Подмигиваю чистым барабаном 🫧",
+"Мои пузырьки скучают. Несите футболки.",
+"Есть свободное окно. И оно пахнет свежестью.",
+"Кто первый — тот сегодня немного ароматнее.",
+"Я уже начистила барабан. Где бельё?",
+"Трусишки сами себя не постирают. Проверено наукой.",
+"Свободна, свежа и готова к серьёзным отношениям с порошком.",
+"Ваши носки всё ещё надеются на спасение.",
+"Пока никто не стирает. Мир явно сошёл с ума.",
+"Барабан пуст. Облачка обеспокоены ☁️",
+"У меня сегодня слишком мало работы. Начинаю скучать.",
+"Ваш выход, футболки 👕",
+"Срочно нужен человек, готовый стать чище.",
+"СВОБОДНА. Потом не говорите, что не видели.",
+"Пена готова. Пузырьки построены.",
+"Если ждали знак — 🧺 вот он.",
+"Один цикл отделяет вас от цивилизации.",
+"Машинка свободна. Министерство свежести подтверждает.",
+"Носки уже спрашивают, когда их очередь.",
+"Я готова вращать. Ты готов загрузить?",
+"Свежесть начинается с одного нажатия.",
+"Очереди нет. Это почти чудо.",
+"Можно заходить без предварительной записи.",
+"Дайте мне хотя бы полотенце.",
+"Стою чистая и без дела. Как-то даже обидно.",
+"Вода готова совершать великие дела.",
+"Ваш гардероб заслуживает обновления.",
+"Могу прямо сейчас сделать кому-то приятно пахнущую жизнь.",
+"Свободная стиралка — пользуйтесь моментом.",
+"Барабан ждёт своего следующего героя."
 
 ];
 
 
-/* ==========================================
-   ФРАЗЫ С ИМЕНЕМ СТИРАЮЩЕГО
-========================================== */
+/* ====================================
+   ПЕРСОНАЛЬНЫЕ ПРИКОЛЫ
+==================================== */
 
 const personTemplates = [
 
-"{name} официально объявил грязи войну.",
-"{name} решил стать немного чище. Мы поддерживаем.",
-"{name} доверил барабану самое дорогое — носки.",
-"{name} вошёл в историю. Пока только стиральную.",
-"{name} запустил процесс очищения души и футболок.",
-"{name} сделал выбор в пользу цивилизации.",
-"{name} сейчас ближе к чистоте, чем большинство из нас.",
-"{name} решил: хватит откладывать неизбежное.",
-"{name} находится в активной фазе бытового развития.",
-"{name} отправил гардероб на техническое обслуживание.",
-"{name} сегодня отвечает за вращение планеты.",
-"{name} временно возглавил Министерство чистоты.",
-"{name} поставил всё на барабан.",
-"{name} сейчас буквально крутится вокруг своих вещей.",
-"{name} инвестировал время в чистые носки.",
-"{name} запускает реформы в собственном гардеробе.",
-"{name} понял главное: свежесть сама не приходит.",
-"{name} сегодня главный герой этой бытовой драмы.",
-"{name} совершил поступок взрослого человека — запустил стирку.",
-"{name} повышает индекс чистоты коллектива.",
-"{name} пошёл против системы. И против грязи.",
-"{name} доверился технологиям. Смелый человек.",
-"{name} активировал режим «я больше так не могу это носить».",
-"{name} проводит глубокую модернизацию вещей.",
-"{name} приблизился к чистоте ещё на один цикл.",
-"{name} вступил в переговоры с порошком.",
-"{name} выбрал путь воды, пены и центрифуги.",
-"{name} сейчас совершает важнейший бытовой манёвр.",
-"{name} делает этот коллектив немного ароматнее.",
-"{name} просто захотел нормальной жизни."
+"{name} решил стать немного чище.",
+"{name} доверил мне самое дорогое — носки.",
+"{name} официально объявил войну грязному белью.",
+"{name} сегодня ближе к свежести, чем большинство из нас.",
+"{name} отправил гардероб на курорт с пузырьками.",
+"{name} включил режим «хочу пахнуть цивилизованно».",
+"{name} сделал выбор взрослого человека — нажал Старт.",
+"{name} теперь главный герой барабанной драмы.",
+"{name} отправил трусишки в большое путешествие.",
+"{name} вступил в серьёзные отношения с порошком.",
+"{name} решил, что свежесть — лучший аксессуар.",
+"{name} доверился центрифуге. Смело.",
+"{name} повышает общий индекс чистоты коллектива.",
+"{name} проходит путь от «ну нормально» до «о, свеженькое».",
+"{name} сегодня министр чистоты.",
+"{name} отправил футболки на техническое обслуживание.",
+"{name} сейчас буквально вращается вокруг вопроса чистоты.",
+"{name} инвестировал время в хорошие носки.",
+"{name} вступил в активную фазу бытового развития.",
+"{name} запускает реформу собственного гардероба.",
+"{name} решительно приблизился к чистоте.",
+"{name} понял: откладывать эту стирку уже было некуда.",
+"{name} активировал режим свежести.",
+"{name} сейчас улучшает окружающую среду примерно на один комплект одежды.",
+"{name} делает этот коллектив чуть ароматнее.",
+"{name} вошёл в историю. Пока стиральную.",
+"{name} доверил технологии свои трусишки.",
+"{name} выбрал воду. Пена поддержала.",
+"{name} пошёл против грязи.",
+"{name} просто захотел красивой жизни."
 
 ];
 
 
-/* ==========================================
-   ОБЫЧНЫЕ ШУТКИ ВО ВРЕМЯ СТИРКИ
-========================================== */
+/* ====================================
+   СТИРАЕТСЯ
+==================================== */
 
 const washingPhrases = [
 
-"NASA внимательно следит за оборотами барабана.",
-"Всё по плану. Сам план никто не видел.",
-"Грязь сопротивляется, но адвокат у неё слабый.",
-"Один носок уже перестал выходить на связь.",
-"Физики называют это «крутится». Мы называем это прогрессом.",
-"Переговоры порошка и грязи сорваны.",
-"Это не шум. Это промышленный рост.",
+"Футболка кружится. Кажется, ей нравится.",
+"Трусишки проходят ускоренный курс свежести.",
+"Носок уже потерял второго носка. Всё штатно.",
+"Пузырьки работают сверхурочно.",
+"NASA опять следит за центрифугой.",
+"Грязь сопротивляется, но сегодня не её день.",
 "Барабан делает больше оборотов, чем некоторые за неделю.",
-"Центрифуга проводит аудит содержимого.",
-"Система работает штатно. Паниковать рано.",
-"Вещи отправились на карусель без билета.",
-"Идёт операция «Вернуть одежде достоинство».",
-"Одежда проходит интенсивный курс личностного роста.",
-"Порошок сделал первый ход.",
-"Технически всё отлично. Эмоционально неизвестно.",
-"Некоторые футболки сегодня увидели воду и сильно удивились.",
-"Барабан: 1. Грязь: 0.",
+"Всё идёт по плану. План засекречен.",
+"Пена захватила стратегические позиции.",
+"Ваше бельё сейчас находится на водных процедурах.",
+"Носки совершили третий круг почёта.",
+"Технически это стирка. Эмоционально — приключение.",
+"Вещи слегка в шоке, но становятся чище.",
+"Система работает. Трусишки под контролем.",
 "Идёт генеральная репетиция свежести.",
-"Мы не можем раскрывать подробности. Работает центрифуга.",
-"Ваше бельё находится в зоне повышенной влажности.",
-"Чистота медленно захватывает территорию.",
-"Внутри происходит больше событий, чем в общем чате.",
-"Просьба сохранять спокойствие. Трусы под контролем.",
-"Министерство чистоты докладывает: операция продолжается.",
-"Носки отправились в большое путешествие.",
-"Машинка ведёт себя уверенно. Подозрительно уверенно.",
-"Сейчас всё решается на молекулярном уровне.",
-"Грязь уже понимает, что зря пришла.",
-"Шансов у пятен становится всё меньше.",
-"Артисты отдыхают. Барабан работает."
+"Порошок ведёт по очкам.",
+"Грязь уже просит переговоров.",
+"Футболка говорит, что всё нормально.",
+"Центрифуга выглядит подозрительно довольной.",
+"Идёт глубокая модернизация гардероба.",
+"Пузырьки сообщают: прогресс есть.",
+"Это не шум. Это звук свежего будущего.",
+"Барабан работает. Артисты отдыхают.",
+"Одежда проходит личностный рост.",
+"Один носок сейчас смотрит на жизнь совсем иначе.",
+"Свежесть медленно захватывает территорию.",
+"Вода и порошок нашли общий язык.",
+"Стирка продолжает удивлять физиков.",
+"Внутри больше движения, чем на репетиции.",
+"Машинка делает то, ради чего пришла в этот мир."
 
 ];
 
 
-/* ==========================================
-   ПОСЛЕДНИЕ 15 МИНУТ
-========================================== */
+/* ====================================
+   ПОСЛЕДНИЕ 15 МИН
+==================================== */
 
 const finalPhrases = [
 
-"Финишная прямая. Тазик можно постепенно выводить из гаража.",
-"Бельё уже видит свет в конце барабана.",
-"До свободы осталось совсем немного.",
-"Готовьтесь встречать героев чистыми.",
-"Машинка уже мысленно закончила.",
-"Начинаются финальные титры.",
-"Носки скоро будут освобождены.",
-"Можно начинать моральную подготовку к открытию люка.",
-"Центрифуга выходит на бис.",
-"Не надо пока стоять возле машинки и гипнотизировать её.",
-"Разминка перед выгрузкой разрешена.",
-"Бельё уже спрашивает: «Мы приехали?»",
-"Грязь готовит официальную капитуляцию.",
-"Следующий артист может понемногу нервничать.",
+"Ещё немного — можно искать тазик.",
+"Свежесть уже видна на горизонте.",
+"Футболки готовятся к выходу.",
+"Бельё почти прошло весь путь героя.",
+"Трусишки уже собирают чемоданы.",
+"Последние минуты водного курорта.",
+"Грязь готовит капитуляцию.",
+"Барабан начинает думать о пенсии.",
+"Следующий артист может постепенно готовиться.",
+"Почти всё. Не торопите пузырьки.",
+"Финишная прямая пахнет порошком.",
+"Машинка оформляет документы на освобождение вещей.",
+"Носки скоро увидят внешний мир.",
+"Юридически всё уже почти чистое.",
+"Красную дорожку для белья можно готовить.",
+"Финальные обороты начинаются.",
+"Можно постепенно подходить. Но без паники.",
+"Стирка скоро станет историей.",
 "Остался последний акт бытовой драмы.",
-"Красную дорожку для носков можно раскатывать.",
-"Машинка завершает оформление документов на чистоту.",
-"Очередь, готовьте серьёзные лица.",
-"Почти всё. Не торопите искусство.",
-"Финиш настолько близко, что его уже слышно.",
-"Последние минуты великого вращения.",
-"Можно перестать обновлять страницу каждые три секунды.",
-"Барабан начинает передавать полномочия.",
-"Ваше бельё прошло почти весь путь героя.",
-"Юридически вещи уже почти чистые.",
-"До открытия люка осталось меньше, чем до некоторых репетиций.",
-"Главное сейчас — не сорваться и не нажать STOP за две минуты до конца.",
-"Финальный рывок. Верим в барабан.",
-"Следующий номер программы уже готовится.",
-"Скоро машинка снова станет достоянием народа."
+"Вещи уже мысленно на сушилке.",
+"Порошок почти закончил свою смену.",
+"Следующий в очереди — не теряем бдительность.",
+"Свежесть уже совсем рядом.",
+"Ещё немного великого вращения.",
+"Барабан готовится передать власть.",
+"Почти готово. Терпение.",
+"Система выходит на финиш.",
+"Вещи почти официально реабилитированы.",
+"Последний рывок.",
+"Скоро снова будет СВОБОДНА."
 
 ];
 
 
-/* ==========================================
-   ПОСЛЕДНИЕ 3 МИНУТЫ
-========================================== */
+/* ====================================
+   ПОСЛЕДНИЕ 3 МИН
+==================================== */
 
 const panicPhrases = [
 
-"🚨 ТАЗИК. ГДЕ ТАЗИК?!",
-"ТРИ МИНУТЫ. СОХРАНЯЕМ ВНЕШНЕЕ СПОКОЙСТВИЕ.",
-"Бельё уже стоит у выхода с чемоданами.",
-"Следующий! Разминайтесь!",
-"Люк практически чувствует свободу.",
-"Носки требуют немедленного освобождения.",
-"Приготовиться к торжественной выгрузке.",
-"ВСЁ. ПОЧТИ ВСЁ. НИЧЕГО НЕ ТРОГАТЬ.",
-"Последние обороты цивилизации.",
-"Сейчас произойдёт историческое событие.",
-"Очередь, внимание. Ваш час близок.",
-"Пододеяльник написал заявление на выход.",
-"Красная тревога: скоро СВОБОДНА.",
-"Проверяем тазики. Корзины. Нервы.",
-"Три минуты до смены власти.",
-"Стиралка передаёт полномочия следующему.",
-"Почти приехали.",
-"Не занимайте стартовую позицию возле люка заранее.",
-"Миссия практически завершена.",
-"Министерство чистоты готовит итоговый отчёт."
+"🚨 ТАЗИКИ НА СТАРТ!",
+"ТРИ МИНУТЫ. ТРУСИШКИ ВЫХОДЯТ!",
+"Носки требуют освобождения.",
+"Футболки уже стоят возле люка.",
+"Красная тревога свежести.",
+"Барабан передаёт полномочия.",
+"Проверяем корзины. Проверяем нервы.",
+"ПОЧТИ ВСЁ. НЕ ТРОГАТЬ.",
+"Очередь, приготовиться!",
+"Вещи уже видят свободу.",
+"Последние обороты.",
+"Пузырьки заканчивают смену.",
+"Люк чувствует приближение открытия.",
+"Следующий герой, разминайтесь.",
+"Трусишки морально готовы покинуть барабан.",
+"Ещё немного!",
+"Миссия почти завершена.",
+"Система выходит на посадку.",
+"Вода покидает чат.",
+"ФИНАЛ БЛИЗКО."
 
 ];
 
 
-/* ==========================================
-   ОЧЕРЕДЬ
-========================================== */
-
 const queuePhrases = [
 
-"Пока всё цивилизованно.",
-"Очередь начинает приобретать политическое значение.",
-"Зафиксирована стиральная миграция.",
-"Совет директоров внимательно наблюдает.",
+"Пока всё культурно.",
+"Очередь приобретает социальное значение.",
 "Начинается чемпионат по ожиданию.",
-"Людей несколько. Машинка одна. Математика беспощадна.",
-"Филиал МФЦ официально открыт.",
-"Ситуация напряжённая, но тазики пока не применяются.",
-"Просьба не продавать места в очереди.",
-"Ещё немного — понадобится электронный талон.",
-"Очередь растёт быстрее экономики.",
-"Главное — без стихийных митингов возле барабана."
+"Машинка одна. Желающих несколько. Математика жестока.",
+"Просьба места не продавать.",
+"Филиал МФЦ открыт.",
+"Тазики сохраняют нейтралитет.",
+"Очередь растёт. Совет директоров обеспокоен.",
+"Ведётся регистрация желающих стать чище.",
+"Главное — без революции возле барабана."
 
 ];
 
 
 function randomFrom(arr){
-  return arr[Math.floor(Math.random()*arr.length)];
+  return arr[
+    Math.floor(
+      Math.random()*arr.length
+    )
+  ];
 }
 
 function personPhrase(name){
-  return randomFrom(personTemplates).replaceAll("{name}",name);
+  return randomFrom(personTemplates)
+    .replaceAll("{name}",name);
 }
 
 
-/* ==========================================
-   100 НАГРАД
-   10 эпитетов × 10 предметов = 100
-========================================== */
+/* ====================================
+   НАГРАДЫ
+==================================== */
 
 const awardAdjectives = [
   "Начинающий",
@@ -882,553 +1153,965 @@ const awardAdjectives = [
 ];
 
 const awardNouns = [
-  "Укротитель носка",
-  "Хранитель порошка",
+  "Спасатель носков",
+  "Укротитель пены",
   "Повелитель барабана",
-  "Магистр пены",
-  "Защитник футболки",
-  "Командор полотенца",
-  "Барон пододеяльника",
-  "Архитектор свежести",
-  "Император центрифуги",
-  "Владыка чистоты"
+  "Хранитель трусишек",
+  "Командор футболки",
+  "Магистр полотенца",
+  "Барон свежести",
+  "Император порошка",
+  "Архитектор чистоты",
+  "Владыка центрифуги"
 ];
 
 const awardEmojis = [
-  "🧦","🫧","🌀","🧼","👕",
-  "🧺","✨","🎪","🏆","👑"
+  "🧦","🫧","🌀","🩲","👕",
+  "🧺","✨","🧼","🏆","👑"
 ];
 
 
 function awardFor(count){
 
-  if(count >= 100){
-    return {
+  if(count>=100){
+    return{
       emoji:"👑",
       name:"СУПЕР-БОСС СТИРКИ",
-      desc:"100 стирок. Барабан признаёт твою власть. Дальше только легенды."
+      desc:"100 стирок. Барабан официально признаёт твою власть."
     };
   }
 
-  const number=Math.max(1,count);
+  const n=Math.max(1,count);
 
-  const a=Math.floor((number-1)/10);
-  const b=(number-1)%10;
+  const a=
+    Math.floor((n-1)/10);
 
-  const specialDescriptions=[
-    "Путь начинается с одного чистого носка.",
-    "Порошок впервые запомнил твоё имя.",
-    "Барабан начинает относиться к тебе серьёзно.",
-    "Грязь уже узнаёт тебя издалека.",
-    "Ты официально часть стиральной системы.",
-    "Уровень бытовой ответственности повышен.",
-    "Центрифуга одобрительно кивает.",
-    "Тазик начинает испытывать уважение.",
-    "Министерство чистоты следит за карьерой.",
-    "Ещё немного — и барабан попросит автограф."
-  ];
+  const b=
+    (n-1)%10;
 
-  return {
+  return{
     emoji:awardEmojis[b],
-    name:`${awardAdjectives[a]} ${awardNouns[b]}`,
-    desc:`Награда №${number}. ${specialDescriptions[b]}`
+    name:
+      awardAdjectives[a]+
+      " "+
+      awardNouns[b],
+
+    desc:
+      "Награда №"+
+      n+
+      ". Ещё один шаг к абсолютной свежести."
   };
 
 }
 
 
-/* ==========================================
-   GAME POINTS
-========================================== */
-
 function pointsFor(item){
-
-  const minutes=
-    Number(item.actualMinutes || item.plannedMinutes || 0);
 
   let points=100;
 
-  points+=Math.min(minutes,120);
+  points+=
+    Number(
+      item.actualMinutes ||
+      item.plannedMinutes ||
+      0
+    );
 
   if(item.reason==="timer"){
     points+=50;
   }
 
   return points;
+
 }
 
 
-/* ==========================================
+/* ====================================
    STATE
-========================================== */
+==================================== */
 
 let currentMachine=null;
 let finishing=false;
+
 let currentMode="";
 let currentPhrase="";
 let lastPhraseChange=0;
+
 let allHistory={};
 
 
-/* ==========================================
-   START WASH
-========================================== */
+/* ====================================
+   START
+==================================== */
 
-document.getElementById("startWash").onclick=async()=>{
+document.getElementById("startWash")
+.onclick=async()=>{
 
-  const name=document.getElementById("user").value;
-  const minutes=Number(document.getElementById("minutes").value);
+  const name=
+    document.getElementById("user").value;
+
+  const minutes=
+    Number(
+      document.getElementById("minutes").value
+    );
 
   if(!name){
-    alert("Сначала представься, герой.");
+    alert("Выбери своё имя 🙂");
     return;
   }
+
 
   const now=new Date();
 
-  if(now.getHours()>=23){
-    alert("После 23:00 барабан официально ушёл с работы 😴");
+  const finishDate=
+    new Date(
+      Date.now()+
+      minutes*60000
+    );
+
+
+  if(
+    finishDate.getDate() !== now.getDate() ||
+    finishDate.getHours() >= 23
+  ){
+
+    alert(
+      "Эта стирка закончится после 23:00. Профсоюз трусишек против 😴"
+    );
+
     return;
   }
 
-  const projected=new Date(Date.now()+minutes*60000);
 
-  if(projected.getDate()!==now.getDate() || projected.getHours()>=23){
-    alert("Эта стирка закончится после 23:00. Профсоюз барабана против.");
+  const snap=
+    await get(machineRef);
+
+  const existing=
+    snap.val();
+
+
+  if(
+    existing &&
+    existing.endTime>Date.now()
+  ){
+
+    alert(
+      "Машинка уже занята чужим бельём 🙂"
+    );
+
     return;
   }
 
-  const snap=await get(machineRef);
-  const existing=snap.val();
 
-  if(existing && existing.endTime>Date.now()){
-    alert("Поздно. Барабан уже состоит в отношениях с другим бельём.");
-    return;
-  }
+  const startTime=
+    Date.now();
 
-  const startTime=Date.now();
 
   await set(machineRef,{
+
     user:name,
+
+    ownerDeviceId:deviceId,
+
     startTime,
-    endTime:startTime+minutes*60000,
+
+    endTime:
+      startTime+
+      minutes*60000,
+
     minutes
+
   });
 
 };
 
 
-/* ==========================================
+/* ====================================
    STOP
-========================================== */
+==================================== */
 
-document.getElementById("stopWash").onclick=async()=>{
+document.getElementById("stopWash")
+.onclick=async()=>{
 
   if(!currentMachine)return;
 
-  const yes=confirm(
-    "Точно всё? Комиссия зафиксирует досрочный выход 😄"
+
+  if(
+    currentMachine.ownerDeviceId !==
+    deviceId
+  ){
+
+    alert(
+      "Эту стирку запускал не ты 😄"
+    );
+
+    return;
+  }
+
+
+  const ok=
+    confirm(
+      "Точно закончил раньше? Барабан всё запомнит 😄"
+    );
+
+
+  if(!ok)return;
+
+
+  await finishWash(
+    currentMachine,
+    "stopped"
   );
 
-  if(!yes)return;
-
-  await finishWash(currentMachine,"stopped");
 };
 
 
-/* ==========================================
+/* ====================================
    FINISH
-========================================== */
+==================================== */
 
-async function finishWash(wash,reason){
+async function finishWash(
+  wash,
+  reason
+){
 
-  if(finishing || !wash)return;
+  if(
+    finishing ||
+    !wash
+  )return;
+
 
   finishing=true;
 
-  const finished=Date.now();
+
+  const finished=
+    Date.now();
+
 
   const actualMinutes=
     Math.max(
       1,
       Math.round(
-        (finished-wash.startTime)/60000
+        (
+          finished -
+          wash.startTime
+        ) /
+        60000
       )
     );
 
-  const existingUserHistory=
+
+  const previous=
     Object.values(allHistory)
-      .filter(x=>x.user===wash.user);
+      .filter(
+        x=>x.user===wash.user
+      );
+
 
   const washNumber=
-    existingUserHistory.length+1;
+    previous.length+1;
 
-  const award=awardFor(washNumber);
 
-  const historyId=
-    String(wash.startTime || finished);
+  const award=
+    awardFor(washNumber);
+
+
+  const id=
+    String(
+      wash.startTime ||
+      finished
+    );
+
 
   await set(
-    ref(db,"history/"+historyId),
+    ref(
+      db,
+      "history/"+id
+    ),
     {
+
       user:wash.user,
-      started:wash.startTime,
+
+      started:
+        wash.startTime,
+
       finished,
-      plannedMinutes:wash.minutes,
+
+      plannedMinutes:
+        wash.minutes,
+
       actualMinutes,
+
       reason,
+
       washNumber,
-      awardName:award.name,
-      awardEmoji:award.emoji
+
+      awardName:
+        award.name,
+
+      awardEmoji:
+        award.emoji
+
     }
   );
 
-  await set(lastAwardRef,{
-    user:wash.user,
-    time:finished,
-    washNumber,
-    ...award
-  });
+
+  await set(
+    lastAwardRef,
+    {
+
+      user:wash.user,
+
+      time:finished,
+
+      washNumber,
+
+      ...award
+
+    }
+  );
+
 
   await remove(machineRef);
 
-  confetti();
+
+  freshCelebration();
+
 
   finishing=false;
+
 }
 
 
-/* ==========================================
-   FIREBASE MACHINE
-========================================== */
+/* ====================================
+   MACHINE
+==================================== */
 
-onValue(machineRef,snapshot=>{
+onValue(
+  machineRef,
+  snapshot=>{
 
-  currentMachine=snapshot.val();
+    currentMachine=
+      snapshot.val();
 
-  currentMode="";
-  currentPhrase="";
-  lastPhraseChange=0;
+    currentMode="";
+    currentPhrase="";
+    lastPhraseChange=0;
 
-  renderMachine();
+    renderMachine();
 
-});
+  }
+);
 
 
 function renderMachine(){
 
-  const statusBox=document.getElementById("statusBox");
-  const status=document.getElementById("status");
-  const freeArea=document.getElementById("freeArea");
-  const busyArea=document.getElementById("busyArea");
-  const drum=document.getElementById("drum");
+  const statusBox=
+    document.getElementById("statusBox");
 
-  if(!currentMachine || currentMachine.endTime<=Date.now()){
+  const status=
+    document.getElementById("status");
+
+  const freeArea=
+    document.getElementById("freeArea");
+
+  const busyArea=
+    document.getElementById("busyArea");
+
+  const clothes=
+    document.getElementById("clothes");
+
+  const stop=
+    document.getElementById("stopWash");
+
+  const locked=
+    document.getElementById("foreignWash");
+
+
+  if(
+    !currentMachine ||
+    currentMachine.endTime<=Date.now()
+  ){
 
     statusBox.classList.remove("busy");
-    status.textContent="СВОБОДНА";
-    status.className="freeText";
+
+    status.textContent=
+      "СВОБОДНА";
+
+    status.className=
+      "freeText";
 
     freeArea.classList.remove("hidden");
+
     busyArea.classList.add("hidden");
 
-    drum.classList.remove("spinning");
+    clothes.classList.remove("spinning");
 
-    document.getElementById("ring")
-      .style.setProperty("--progress",0);
+
+    document
+      .getElementById("ring")
+      .style
+      .setProperty(
+        "--progress",
+        0
+      );
+
 
     if(currentMachine){
-      finishWash(currentMachine,"timer");
+
+      finishWash(
+        currentMachine,
+        "timer"
+      );
+
       return;
+
     }
 
-    document.getElementById("freeMessage").textContent=
-      randomFrom(freePhrases);
+
+    document
+      .getElementById("freeMessage")
+      .textContent=
+        randomFrom(freePhrases);
+
 
     return;
+
   }
 
+
   statusBox.classList.add("busy");
-  status.textContent="ЗАНЯТА";
-  status.className="busyText";
+
+  status.textContent=
+    "ЗАНЯТА";
+
+  status.className=
+    "busyText";
+
 
   freeArea.classList.add("hidden");
+
   busyArea.classList.remove("hidden");
 
-  drum.classList.add("spinning");
+  clothes.classList.add("spinning");
 
-  document.getElementById("currentUser").textContent=
-    personPhrase(currentMachine.user);
+
+  document
+    .getElementById("currentUser")
+    .textContent=
+      personPhrase(
+        currentMachine.user
+      );
+
+
+  const mine=
+    currentMachine.ownerDeviceId ===
+    deviceId;
+
+
+  stop.classList.toggle(
+    "hidden",
+    !mine
+  );
+
+
+  locked.classList.toggle(
+    "hidden",
+    mine
+  );
+
 
   updateTimer();
+
 }
 
 
-/* ==========================================
+/* ====================================
    TIMER
-========================================== */
+==================================== */
 
 function updateTimer(){
 
   if(!currentMachine)return;
 
+
   const remaining=
-    currentMachine.endTime-Date.now();
+    currentMachine.endTime-
+    Date.now();
+
 
   if(remaining<=0){
-    finishWash(currentMachine,"timer");
+
+    finishWash(
+      currentMachine,
+      "timer"
+    );
+
     return;
+
   }
 
-  const totalSeconds=Math.ceil(remaining/1000);
-  const mins=Math.floor(totalSeconds/60);
-  const secs=totalSeconds%60;
 
-  document.getElementById("timer").textContent=
-    String(mins).padStart(2,"0")+
-    ":"+
-    String(secs).padStart(2,"0");
+  const seconds=
+    Math.ceil(
+      remaining/1000
+    );
+
+
+  const mins=
+    Math.floor(
+      seconds/60
+    );
+
+
+  const secs=
+    seconds%60;
+
+
+  document
+    .getElementById("timer")
+    .textContent=
+
+      String(mins)
+      .padStart(2,"0")
+      +
+      ":"
+      +
+      String(secs)
+      .padStart(2,"0");
 
 
   const total=
-    currentMachine.minutes*60000;
+    currentMachine.minutes*
+    60000;
+
 
   const elapsed=
-    total-remaining;
+    total-
+    remaining;
+
 
   const progress=
     Math.min(
       100,
-      Math.max(0,(elapsed/total)*100)
+      Math.max(
+        0,
+        elapsed/total*100
+      )
     );
 
-  document.getElementById("ring")
-    .style.setProperty("--progress",progress);
+
+  document
+    .getElementById("ring")
+    .style
+    .setProperty(
+      "--progress",
+      progress
+    );
 
 
-  document.getElementById("progressCaption").textContent=
-    `${Math.round(progress)}% великого пути пройдено`;
+  document
+    .getElementById("progressText")
+    .textContent=
+
+      Math.round(progress)+
+      "% пути к абсолютной свежести";
 
 
-  let mode="washing";
+  let mode=
+    "washing";
 
-  if(remaining<=3*60*1000){
+
+  if(
+    remaining<=
+    3*60*1000
+  ){
+
     mode="panic";
+
   }
-  else if(remaining<=15*60*1000){
+
+  else if(
+    remaining<=
+    15*60*1000
+  ){
+
     mode="final";
+
   }
 
 
-  const box=
-    document.getElementById("washMessage");
+  const now=
+    Date.now();
 
-  const now=Date.now();
 
   if(
     mode!==currentMode ||
     !currentPhrase ||
-    now-lastPhraseChange>18000
+    now-lastPhraseChange>
+    18000
   ){
 
-    currentMode=mode;
+    currentMode=
+      mode;
+
+
+    const box=
+      document.getElementById(
+        "washMessage"
+      );
+
 
     if(mode==="panic"){
 
-      currentPhrase=randomFrom(panicPhrases);
-      box.className="speech panic";
+      currentPhrase=
+        randomFrom(
+          panicPhrases
+        );
+
+      box.className=
+        "speech panic";
 
     }
-    else if(mode==="final"){
 
-      currentPhrase=randomFrom(finalPhrases);
-      box.className="speech final";
+    else if(
+      mode==="final"
+    ){
+
+      currentPhrase=
+        randomFrom(
+          finalPhrases
+        );
+
+      box.className=
+        "speech final";
 
     }
+
     else{
 
-      currentPhrase=randomFrom(washingPhrases);
-      box.className="speech";
+      currentPhrase=
+        randomFrom(
+          washingPhrases
+        );
+
+      box.className=
+        "speech";
 
     }
 
-    box.textContent=currentPhrase;
 
-    lastPhraseChange=now;
+    box.textContent=
+      currentPhrase;
+
+
+    lastPhraseChange=
+      now;
+
   }
 
 }
 
-setInterval(updateTimer,1000);
+
+setInterval(
+  updateTimer,
+  1000
+);
 
 
-/* меняем приглашение свободной машинки */
+/* новая свободная фраза */
 
 setInterval(()=>{
 
   if(!currentMachine){
 
-    document.getElementById("freeMessage").textContent=
-      randomFrom(freePhrases);
+    document
+      .getElementById("freeMessage")
+      .textContent=
+        randomFrom(
+          freePhrases
+        );
 
   }
 
 },20000);
 
 
-/* ==========================================
+/* ====================================
    QUEUE
-========================================== */
+==================================== */
 
-document.getElementById("joinQueue").onclick=async()=>{
+document
+.getElementById("joinQueue")
+.onclick=async()=>{
 
   const name=
-    document.getElementById("queueUser").value;
+    document
+      .getElementById("queueUser")
+      .value;
+
 
   if(!name){
-    alert("Сначала выбери себя.");
+
+    alert(
+      "Выбери себя 🙂"
+    );
+
     return;
+
   }
 
-  const snap=await get(queueRef);
-  const data=snap.val()||{};
+
+  const snap=
+    await get(queueRef);
+
+
+  const data=
+    snap.val()||{};
+
 
   if(
     Object.values(data)
-      .some(x=>x.user===name)
+    .some(
+      x=>x.user===name
+    )
   ){
-    alert("Ты уже в очереди. Система всё помнит 👀");
+
+    alert(
+      "Ты уже в очереди 👀"
+    );
+
     return;
+
   }
 
-  await push(queueRef,{
-    user:name,
-    time:Date.now()
-  });
+
+  await push(
+    queueRef,
+    {
+
+      user:name,
+
+      time:
+        Date.now()
+
+    }
+  );
 
 };
 
 
-onValue(queueRef,snapshot=>{
+onValue(
+  queueRef,
+  snapshot=>{
 
-  const data=snapshot.val();
-  const queue=document.getElementById("queue");
+    const data=
+      snapshot.val();
 
-  queue.innerHTML="";
 
-  if(!data){
+    const queue=
+      document
+        .getElementById("queue");
 
-    queue.innerHTML=
-      '<div class="muted">Очередь пуста. Редкий момент социальной гармонии.</div>';
 
-    document.getElementById("queueComment").textContent="";
+    queue.innerHTML="";
 
-    return;
-  }
 
-  const items=
-    Object.entries(data)
-      .sort((a,b)=>a[1].time-b[1].time);
+    if(!data){
 
-  if(items.length>1){
+      queue.innerHTML=
+        '<div class="muted">Очередь пустая. Свежая социальная гармония.</div>';
 
-    document.getElementById("queueComment").textContent=
-      randomFrom(queuePhrases);
+      document
+        .getElementById("queueComment")
+        .textContent="";
 
-  }else{
+      return;
 
-    document.getElementById("queueComment").textContent=
-      "Один человек ждёт. Пока без революции.";
+    }
 
-  }
 
-  items.forEach(([key,item],i)=>{
+    const items=
+      Object.entries(data)
+        .sort(
+          (a,b)=>
+            a[1].time-
+            b[1].time
+        );
 
-    const row=document.createElement("div");
-    row.className="row queueRow";
 
-    row.innerHTML=
-      `<div>
-        <span class="position">${i+1}</span>
-        <b>${item.user}</b>
-       </div>
-       <span class="muted">нажал — убрать</span>`;
+    document
+      .getElementById("queueComment")
+      .textContent=
 
-    row.onclick=async()=>{
+        items.length>1
+        ?
+        randomFrom(queuePhrases)
+        :
+        "Один человек ждёт. Пока всё культурно.";
 
-      if(confirm(`Убрать ${item.user} из очереди?`)){
-        await remove(ref(db,"queue/"+key));
+
+    items.forEach(
+      ([key,item],i)=>{
+
+        const row=
+          document.createElement(
+            "div"
+          );
+
+        row.className=
+          "row queueRow";
+
+
+        row.innerHTML=
+          `
+          <div>
+            <span class="position">
+              ${i+1}
+            </span>
+            <b>${item.user}</b>
+          </div>
+
+          <span class="muted">
+            нажми — убрать
+          </span>
+          `;
+
+
+        row.onclick=
+          async()=>{
+
+            if(
+              confirm(
+                "Убрать "+
+                item.user+
+                " из очереди?"
+              )
+            ){
+
+              await remove(
+                ref(
+                  db,
+                  "queue/"+key
+                )
+              );
+
+            }
+
+          };
+
+
+        queue.appendChild(
+          row
+        );
+
       }
+    );
 
-    };
-
-    queue.appendChild(row);
-
-  });
-
-});
+  }
+);
 
 
-/* ==========================================
+/* ====================================
    HISTORY + LEADERBOARD
-========================================== */
+==================================== */
 
-onValue(historyRef,snapshot=>{
+onValue(
+  historyRef,
+  snapshot=>{
 
-  allHistory=snapshot.val()||{};
+    allHistory=
+      snapshot.val()||{};
 
-  renderHistory();
-  renderLeaders();
+    renderHistory();
 
-});
+    renderLeaders();
+
+  }
+);
 
 
 function renderHistory(){
 
-  const box=document.getElementById("history");
+  const box=
+    document.getElementById(
+      "history"
+    );
+
 
   const items=
-    Object.values(allHistory)
-      .sort((a,b)=>(b.finished||0)-(a.finished||0))
-      .slice(0,12);
+    Object.values(
+      allHistory
+    )
+    .sort(
+      (a,b)=>
+        (b.finished||0)-
+        (a.finished||0)
+    )
+    .slice(0,12);
+
 
   if(!items.length){
 
     box.innerHTML=
-      '<div class="muted">История пока молчит. Подозрительно.</div>';
+      '<div class="muted">История пока чиста.</div>';
 
     return;
+
   }
+
 
   box.innerHTML="";
 
-  items.forEach(item=>{
 
-    const row=document.createElement("div");
-    row.className="row";
+  items.forEach(
+    item=>{
 
-    const date=
-      new Date(item.finished)
-        .toLocaleString("ru-RU");
+      const row=
+        document.createElement(
+          "div"
+        );
 
-    const note=
-      item.reason==="stopped"
-        ?" · сбежал раньше 🏃"
-        :" · выдержал до конца 🫡";
 
-    row.innerHTML=
-      `<b>${item.user}</b>
-       <div class="muted">
-       ${date}${note}
-       </div>
-       <span class="badge">
-       ${item.awardEmoji||"🏆"}
-       ${item.awardName||"Награда"}
-       </span>`;
+      row.className=
+        "row";
 
-    box.appendChild(row);
 
-  });
+      const date=
+        new Date(
+          item.finished
+        )
+        .toLocaleString(
+          "ru-RU"
+        );
+
+
+      const note=
+        item.reason==="stopped"
+        ?
+        " · закончил раньше"
+        :
+        " · выдержал до конца 🫡";
+
+
+      row.innerHTML=
+        `
+        <b>${item.user}</b>
+
+        <div class="muted">
+          ${date}${note}
+        </div>
+
+        <span class="badge">
+          ${item.awardEmoji||"🏆"}
+          ${item.awardName||"Награда"}
+        </span>
+        `;
+
+
+      box.appendChild(row);
+
+    }
+  );
 
 }
 
@@ -1437,170 +2120,276 @@ function renderLeaders(){
 
   const users={};
 
-  Object.values(allHistory).forEach(item=>{
 
-    if(!item.user)return;
+  Object.values(
+    allHistory
+  )
+  .forEach(
+    item=>{
 
-    if(!users[item.user]){
+      if(!item.user)return;
 
-      users[item.user]={
-        washes:0,
-        minutes:0,
-        points:0,
-        stops:0
-      };
+
+      if(
+        !users[item.user]
+      ){
+
+        users[item.user]={
+          washes:0,
+          minutes:0,
+          points:0
+        };
+
+      }
+
+
+      const user=
+        users[item.user];
+
+
+      user.washes++;
+
+
+      user.minutes+=
+        Number(
+          item.actualMinutes||
+          item.plannedMinutes||
+          0
+        );
+
+
+      user.points+=
+        pointsFor(item);
 
     }
-
-    const u=users[item.user];
-
-    u.washes++;
-    u.minutes+=Number(
-      item.actualMinutes ||
-      item.plannedMinutes ||
-      0
-    );
-
-    u.points+=pointsFor(item);
-
-    if(item.reason==="stopped"){
-      u.stops++;
-    }
-
-  });
+  );
 
 
   const ranking=
     Object.entries(users)
-      .sort((a,b)=>b[1].points-a[1].points);
+      .sort(
+        (a,b)=>
+          b[1].points-
+          a[1].points
+      );
 
 
   const box=
-    document.getElementById("leaders");
+    document.getElementById(
+      "leaders"
+    );
+
 
   if(!ranking.length){
 
     box.innerHTML=
-      '<div class="muted">Соревнование ещё не началось.</div>';
+      '<div class="muted">Чемпионат свежести ещё не начался.</div>';
 
     return;
+
   }
+
 
   box.innerHTML="";
 
-  ranking.forEach(([name,data],i)=>{
 
-    const award=
-      awardFor(data.washes);
+  ranking.forEach(
+    ([name,data],i)=>{
 
-    const row=
-      document.createElement("div");
+      const award=
+        awardFor(
+          data.washes
+        );
 
-    row.className="row leader";
 
-    const medal=
-      i===0?"👑":
-      i===1?"🥈":
-      i===2?"🥉":
-      i+1;
+      const row=
+        document.createElement(
+          "div"
+        );
 
-    row.innerHTML=
-      `
-      <div class="rank ${i===0?"first":""}">
-        ${medal}
-      </div>
 
-      <div>
-        <div class="leaderName">
-          ${name}
+      row.className=
+        "row leader";
+
+
+      let place=i+1;
+
+      if(i===0)place="👑";
+      if(i===1)place="🥈";
+      if(i===2)place="🥉";
+
+
+      row.innerHTML=
+        `
+        <div class="rank ${i===0?"first":""}">
+          ${place}
         </div>
 
-        <div class="muted">
-          ${data.washes} стирок ·
-          ${data.minutes} мин
+        <div>
+
+          <div class="leaderName">
+            ${name}
+          </div>
+
+          <div class="muted">
+            ${data.washes} стирок ·
+            ${data.minutes} минут
+          </div>
+
+          <span class="badge">
+            ${award.emoji}
+            ${award.name}
+          </span>
+
+          <div class="levelbar">
+            <div
+              style="width:${Math.min(100,data.washes)}%">
+            </div>
+          </div>
+
         </div>
 
-        <span class="badge ${data.washes>=100?"superboss":""}">
-          ${award.emoji} ${award.name}
-        </span>
-
-        <div class="levelbar">
-          <div style="width:${Math.min(100,data.washes)}%"></div>
+        <div class="points">
+          ${data.points} XP
         </div>
-      </div>
+        `;
 
-      <div class="points">
-        ${data.points} XP
-      </div>
-      `;
 
-    box.appendChild(row);
+      box.appendChild(
+        row
+      );
 
-  });
+    }
+  );
 
 }
 
 
-/* ==========================================
+/* ====================================
    LAST AWARD
-========================================== */
+==================================== */
 
-onValue(lastAwardRef,snapshot=>{
+onValue(
+  lastAwardRef,
+  snapshot=>{
 
-  const award=snapshot.val();
+    const award=
+      snapshot.val();
 
-  const card=
-    document.getElementById("awardCard");
 
-  if(!award){
+    const card=
+      document.getElementById(
+        "awardCard"
+      );
 
-    card.classList.add("hidden");
-    return;
+
+    if(!award){
+
+      card.classList.add(
+        "hidden"
+      );
+
+      return;
+
+    }
+
+
+    card.classList.remove(
+      "hidden"
+    );
+
+
+    document
+      .getElementById("awardEmoji")
+      .textContent=
+        award.emoji;
+
+
+    document
+      .getElementById("awardName")
+      .textContent=
+
+        award.user+
+        ": "+
+        award.name;
+
+
+    document
+      .getElementById("awardDesc")
+      .textContent=
+        award.desc;
+
   }
-
-  card.classList.remove("hidden");
-
-  document.getElementById("awardEmoji").textContent=
-    award.emoji;
-
-  document.getElementById("awardName").textContent=
-    `${award.user}: ${award.name}`;
-
-  document.getElementById("awardDesc").textContent=
-    award.desc;
-
-});
+);
 
 
-/* ==========================================
-   CONFETTI
-========================================== */
+/* ====================================
+   FRESH CELEBRATION
+==================================== */
 
-function confetti(){
+function freshCelebration(){
 
-  const pieces=["✨","🫧","🧦","🎉","🏆","🧺"];
+  const pieces=[
+    "🫧",
+    "✨",
+    "☁️",
+    "🧦",
+    "👕",
+    "🩲",
+    "💧"
+  ];
 
-  for(let i=0;i<24;i++){
 
-    const el=document.createElement("div");
+  for(
+    let i=0;
+    i<30;
+    i++
+  ){
 
-    el.className="confetti";
-    el.textContent=randomFrom(pieces);
+    const el=
+      document.createElement(
+        "div"
+      );
+
+
+    el.className=
+      "freshBurst";
+
+
+    el.textContent=
+      randomFrom(
+        pieces
+      );
+
 
     el.style.left=
-      Math.random()*100+"vw";
+      Math.random()*
+      100+
+      "vw";
+
 
     el.style.fontSize=
-      (15+Math.random()*18)+"px";
+      (
+        15+
+        Math.random()*18
+      )+
+      "px";
+
 
     el.style.animationDelay=
-      Math.random()*.8+"s";
+      Math.random()*
+      .7+
+      "s";
 
-    document.body.appendChild(el);
+
+    document.body.appendChild(
+      el
+    );
+
 
     setTimeout(
       ()=>el.remove(),
-      4000
+      4200
     );
 
   }
@@ -1608,11 +2397,13 @@ function confetti(){
 }
 
 
-/* ==========================================
+/* ====================================
    INITIAL
-========================================== */
+==================================== */
 
-document.getElementById("freeMessage").textContent=
+document
+.getElementById("freeMessage")
+.textContent=
   randomFrom(freePhrases);
 
 </script>
