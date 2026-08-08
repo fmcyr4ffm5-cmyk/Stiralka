@@ -1,330 +1,633 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Стиралка Alazana</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стиралка</title>
 
-  <style>
-    * { box-sizing: border-box; }
+<style>
+* { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f2f4f7;
-      color: #111827;
-    }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f3f4f6;
+  color: #111827;
+}
 
-    .wrap {
-      max-width: 600px;
-      margin: auto;
-      padding: 24px 16px 50px;
-    }
+.wrap {
+  max-width: 620px;
+  margin: auto;
+  padding: 22px 16px 60px;
+}
 
-    h1 { font-size: 34px; }
+h1 { font-size: 34px; }
 
-    .card {
-      background: white;
-      border-radius: 24px;
-      padding: 24px;
-      margin-bottom: 18px;
-      box-shadow: 0 8px 25px rgba(0,0,0,.06);
-    }
+.card {
+  background: white;
+  border-radius: 24px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 7px 24px rgba(0,0,0,.06);
+}
 
-    #status {
-      font-size: 30px;
-      font-weight: 800;
-      color: #059669;
-      margin-bottom: 22px;
-    }
+#status {
+  font-size: 29px;
+  font-weight: 800;
+  color: #059669;
+  margin-bottom: 18px;
+}
 
-    #status.busy { color: #dc2626; }
+#status.busy { color: #dc2626; }
 
-    label {
-      display: block;
-      font-size: 18px;
-      font-weight: 700;
-      margin: 16px 0 8px;
-    }
+.current-user {
+  text-align: center;
+  font-size: 21px;
+  font-weight: 750;
+}
 
-    select, button {
-      width: 100%;
-      padding: 16px;
-      border-radius: 16px;
-      font-size: 18px;
-    }
+#timer {
+  text-align: center;
+  font-size: 48px;
+  font-weight: 850;
+  margin: 10px 0;
+}
 
-    select {
-      background: white;
-      border: 2px solid #d1d5db;
-    }
+#joke {
+  text-align: center;
+  background: #f3f4f6;
+  border-radius: 16px;
+  padding: 14px;
+  margin: 14px 0;
+  font-size: 17px;
+  line-height: 1.4;
+}
 
-    button {
-      margin-top: 18px;
-      border: 0;
-      background: #111827;
-      color: white;
-      font-weight: 800;
-    }
+label {
+  display: block;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 16px 0 8px;
+}
 
-    #timer {
-      font-size: 42px;
-      font-weight: 800;
-      text-align: center;
-      margin: 18px 0;
-    }
+select, button {
+  width: 100%;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 17px;
+}
 
-    .hidden { display: none; }
+select {
+  background: white;
+  border: 2px solid #d1d5db;
+}
 
-    #queue div, #history div {
-      padding: 10px 0;
-      border-bottom: 1px solid #eee;
-    }
-  </style>
+button {
+  border: 0;
+  margin-top: 14px;
+  background: #111827;
+  color: white;
+  font-weight: 800;
+}
+
+.stop {
+  background: #dc2626;
+  font-size: 18px;
+}
+
+.queueButton {
+  background: #2563eb;
+}
+
+.hidden { display: none !important; }
+
+.queue-item,
+.history-item {
+  padding: 11px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.empty {
+  color: #6b7280;
+  padding-top: 12px;
+}
+</style>
 </head>
 
 <body>
+
 <div class="wrap">
 
-  <h1>Стиралка</h1>
+<h1>🧺 Стиралка</h1>
 
-  <div class="card">
-    <div id="status">● СВОБОДНА</div>
+<div class="card">
 
-    <div id="current" class="hidden">
-      <div id="currentUser"></div>
-      <div id="timer">00:00</div>
-    </div>
+<div id="status">● СВОБОДНА</div>
 
-    <label>Кто стирает?</label>
-    <select id="user">
-      <option value="">Выбрать имя</option>
-      <option>Александр</option>
-      <option>Анечка</option>
-      <option>Ваня</option>
-      <option>Виктор</option>
-      <option>Дима</option>
-      <option>Коля</option>
-      <option>Леся</option>
-      <option>Юра</option>
-      <option>Каспер</option>
-    </select>
+<div id="current" class="hidden">
 
-    <label>На сколько?</label>
-    <select id="minutes">
-      <option value="15">15 минут</option>
-      <option value="30">30 минут</option>
-      <option value="45">45 минут</option>
-      <option value="60">1 час</option>
-      <option value="90">1 час 30 минут</option>
-      <option value="120">2 часа</option>
-    </select>
+  <div id="currentUser" class="current-user"></div>
 
-    <button id="start">Начать стирку</button>
-  </div>
+  <div id="timer">00:00</div>
 
-  <div class="card">
-    <h2>Очередь</h2>
+  <div id="joke"></div>
 
-    <select id="queueUser">
-      <option value="">Выбрать имя</option>
-      <option>Александр</option>
-      <option>Анечка</option>
-      <option>Ваня</option>
-      <option>Виктор</option>
-      <option>Дима</option>
-      <option>Коля</option>
-      <option>Леся</option>
-      <option>Юра</option>
-      <option>Каспер</option>
-    </select>
-
-    <button id="joinQueue">Встать в очередь</button>
-    <div id="queue"></div>
-  </div>
-
-  <div class="card">
-    <h2>Последние стирки</h2>
-    <div id="history">Пока стирок нет</div>
-  </div>
+  <button id="stopWash" class="stop">
+    ⏹ ЗАКОНЧИТЬ СТИРКУ
+  </button>
 
 </div>
 
+<div id="controls">
+
+<label>Кто стирает?</label>
+
+<select id="user">
+<option value="">Выбрать имя</option>
+<option>Александр</option>
+<option>Анечка</option>
+<option>Наталия</option>
+<option>Ваня</option>
+<option>Виктор</option>
+<option>Дима</option>
+<option>Коля</option>
+<option>Леся</option>
+<option>Суримай</option>
+<option>Юра</option>
+<option>Каспер</option>
+</select>
+
+<label>На сколько?</label>
+
+<select id="minutes">
+<option value="15">15 минут</option>
+<option value="30">30 минут</option>
+<option value="45">45 минут</option>
+<option value="60" selected>1 час</option>
+<option value="90">1 час 30 минут</option>
+<option value="120">2 часа</option>
+</select>
+
+<button id="startWash">
+🫧 Начать стирку
+</button>
+
+</div>
+</div>
+
+
+<div class="card">
+
+<h2>👥 Очередь</h2>
+
+<select id="queueUser">
+<option value="">Выбрать имя</option>
+<option>Александр</option>
+<option>Анечка</option>
+<option>Наталия</option>
+<option>Ваня</option>
+<option>Виктор</option>
+<option>Дима</option>
+<option>Коля</option>
+<option>Леся</option>
+<option>Суримай</option>
+<option>Юра</option>
+<option>Каспер</option>
+</select>
+
+<button id="joinQueue" class="queueButton">
+➕ Встать в очередь
+</button>
+
+<div id="queue"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📜 Последние стирки</h2>
+
+<div id="history">
+Пока стирок нет
+</div>
+
+</div>
+
+</div>
+
+
 <script type="module">
-import { initializeApp } from
-"https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
 import {
-  getDatabase,
-  ref,
-  set,
-  push,
-  onValue,
-  remove
-} from
-"https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+getDatabase,
+ref,
+set,
+push,
+onValue,
+remove,
+get
+}
+from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAzUWlWuqwKFwhSpBhC8rvH-_U23HH73D0",
-  authDomain: "stiralka-alazana.firebaseapp.com",
-  databaseURL: "https://stiralka-alazana-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "stiralka-alazana",
-  storageBucket: "stiralka-alazana.firebasestorage.app",
-  messagingSenderId: "583128021865",
-  appId: "1:583128021865:web:45a2c120d330ecce9edbf8"
+apiKey: "AIzaSyAzUWlWuqwKFwhSpBhC8rvH-_U23HH73D0",
+authDomain: "stiralka-alazana.firebaseapp.com",
+databaseURL: "https://stiralka-alazana-default-rtdb.europe-west1.firebasedatabase.app",
+projectId: "stiralka-alazana",
+storageBucket: "stiralka-alazana.firebasestorage.app",
+messagingSenderId: "583128021865",
+appId: "1:583128021865:web:45a2c120d330ecce9edbf8"
 };
+
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-const machineRef = ref(db, "machine");
-const queueRef = ref(db, "queue");
-const historyRef = ref(db, "history");
+const machineRef = ref(db,"machine");
+const queueRef = ref(db,"queue");
+const historyRef = ref(db,"history");
 
-document.getElementById("start").onclick = async () => {
-  const name = document.getElementById("user").value;
-  const minutes = Number(document.getElementById("minutes").value);
 
-  if (!name) {
-    alert("Выбери имя");
-    return;
-  }
+const jokes = [
 
-  const endTime = Date.now() + minutes * 60000;
+"О боже… кажется, это надолго 😅",
+"Барабан крутится — цирк продолжается 🎪",
+"NASA уже следит за этим циклом 🚀",
+"Дипломатические переговоры со стиралкой не помогут 🤝",
+"Где-то внутри прямо сейчас теряется один носок 🧦",
+"Машинка работает. Не кормить и не пугать 🫧",
+"Чистота требует жертв. И немного времени ⏳",
+"Этот барабан видел больше, чем мы все вместе 👀",
+"Операция «Свежий носок» идёт по плану 🫡",
+"Следующий артист, приготовиться! 🎪",
+"Бельё под контролем. Просьба не паниковать 🚨",
+"Кажется, вещи отправились на карусель 🎠",
+"Сегодня в программе: вода, порошок и драматургия 🎭",
+"Центрифуга набирает обороты. Держимся 🌀",
+"Машинка занята важными государственными делами 🏛️",
+"Порошок сделал всё, что мог. Теперь дело за техникой 🫧",
+"Это не просто стирка. Это путь к новой жизни ✨",
+"Идёт генеральная репетиция чистоты 🎪",
+"Чистое бельё само себя не сделает. К сожалению 😌",
+"Можно расходиться. Здесь всё серьёзно 🫡",
+"Система работает штатно. Паниковать пока рано 😎",
+"Идёт высокотехнологичное вращение одежды 🚀",
+"Носки вошли в барабан. Обратного пути нет 🧦",
+"Переживёт ли второй носок этот цикл? 👀",
+"Стирка одобрена Министерством чистоты 🧼",
+"Не стучите. Машинка очень сосредоточена 🤫",
+"Ещё немного — и одежда снова сможет появляться на людях 😄",
+"Барабан работает. Артисты отдыхают 🎪",
+"Куда исчезают носки? Следствие продолжается 🤔",
+"Стиралка взяла ситуацию в свои… барабаны 🌀",
+"Сейчас происходит маленькое бытовое чудо ✨",
+"Миссия «Свежесть» успешно запущена 🚀",
+"Уровень цивилизации повышается с каждым оборотом 📈",
+"Бельё временно недоступно. Проходит перезагрузку 🔄",
+"Машинка просит немного времени 😌",
+"Чистота уже где-то рядом 🫧",
+"Если долго смотреть на таймер, быстрее он не пойдёт 👀",
+"Всё идёт по плану. Какому именно — уточняется 😅",
+"Машинка временно стала главным артистом программы 🎪",
+"Бельё узнаёт, что такое настоящий аттракцион 🎢",
+"Барабан: 1. Грязь: 0. Матч продолжается 🏆",
+"Если слышите вращение — значит прогресс идёт 🌀",
+"Это будет легендарная стирка. Мы чувствуем 😎",
+"Физики называют это «ну крутится и крутится» 🔬",
+"Осталось дождаться финальных титров 🎬",
+"Ваш выход скоро. Пока стирает другая звезда ⭐",
+"Терпение. Великие дела быстро не стираются 😌",
+"Грязь сопротивляется, но шансов у неё немного 💪",
+"Машинка думает. Не мешаем профессионалу 🤓",
+"В барабане сейчас больше движения, чем на репетиции 🎪"
 
-  await set(machineRef, {
-    user: name,
-    endTime: endTime
-  });
-};
+];
 
-document.getElementById("joinQueue").onclick = async () => {
-  const name = document.getElementById("queueUser").value;
 
-  if (!name) {
-    alert("Выбери имя");
-    return;
-  }
+function randomJoke(){
+return jokes[Math.floor(Math.random()*jokes.length)];
+}
 
-  await push(queueRef, {
-    user: name,
-    time: Date.now()
-  });
-};
 
 let currentMachine = null;
-
-onValue(machineRef, snapshot => {
-  currentMachine = snapshot.val();
-  renderMachine();
-});
-
-function renderMachine() {
-  const status = document.getElementById("status");
-  const current = document.getElementById("current");
-  const currentUser = document.getElementById("currentUser");
-
-  if (!currentMachine || currentMachine.endTime <= Date.now()) {
-    status.textContent = "● СВОБОДНА";
-    status.classList.remove("busy");
-    current.classList.add("hidden");
-
-    if (currentMachine) finishWash(currentMachine);
-
-    return;
-  }
-
-  status.textContent = "● ЗАНЯТА";
-  status.classList.add("busy");
-  current.classList.remove("hidden");
-  currentUser.textContent = "Стирает: " + currentMachine.user;
-
-  updateTimer();
-}
-
-function updateTimer() {
-  if (!currentMachine) return;
-
-  const remaining = currentMachine.endTime - Date.now();
-
-  if (remaining <= 0) {
-    renderMachine();
-    return;
-  }
-
-  const totalSeconds = Math.floor(remaining / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-
-  document.getElementById("timer").textContent =
-    String(minutes).padStart(2,"0") + ":" +
-    String(seconds).padStart(2,"0");
-}
-
-setInterval(updateTimer, 1000);
-
 let finishing = false;
 
-async function finishWash(wash) {
-  if (finishing) return;
-  finishing = true;
 
-  await push(historyRef, {
-    user: wash.user,
-    finished: Date.now()
-  });
+document.getElementById("startWash").onclick =
+async () => {
 
-  await remove(machineRef);
+const name =
+document.getElementById("user").value;
 
-  finishing = false;
+const minutes =
+Number(document.getElementById("minutes").value);
+
+if(!name){
+alert("Выбери своё имя 🙂");
+return;
 }
 
-onValue(queueRef, snapshot => {
-  const queue = document.getElementById("queue");
-  queue.innerHTML = "";
+const snap = await get(machineRef);
+const existing = snap.val();
 
-  const data = snapshot.val();
+if(existing && existing.endTime > Date.now()){
+alert("Стиралка уже занята 🙂");
+return;
+}
 
-  if (!data) {
-    queue.innerHTML = "<p>Очередь пустая</p>";
-    return;
-  }
+const startTime = Date.now();
 
-  Object.values(data)
-    .sort((a,b) => a.time - b.time)
-    .forEach((item, i) => {
-      const div = document.createElement("div");
-      div.textContent = (i + 1) + ". " + item.user;
-      queue.appendChild(div);
-    });
+await set(machineRef,{
+user:name,
+startTime:startTime,
+endTime:startTime + minutes*60000,
+minutes:minutes,
+joke:randomJoke()
 });
 
-onValue(historyRef, snapshot => {
-  const history = document.getElementById("history");
-  const data = snapshot.val();
+};
 
-  if (!data) {
-    history.textContent = "Пока стирок нет";
-    return;
-  }
 
-  const items = Object.values(data)
-    .sort((a,b) => b.finished - a.finished)
-    .slice(0, 10);
+document.getElementById("stopWash").onclick =
+async () => {
 
-  history.innerHTML = "";
+if(!currentMachine) return;
 
-  items.forEach(item => {
-    const div = document.createElement("div");
-    const date = new Date(item.finished);
+const ok =
+confirm("Стирка закончилась раньше?");
 
-    div.textContent =
-      item.user + " — " +
-      date.toLocaleString("ru-RU");
+if(!ok) return;
 
-    history.appendChild(div);
-  });
+await finishWash(currentMachine,"stopped");
+
+};
+
+
+async function finishWash(wash,reason){
+
+if(finishing) return;
+
+finishing = true;
+
+const finished = Date.now();
+
+const id =
+String(wash.startTime || finished);
+
+await set(
+ref(db,"history/"+id),
+{
+user:wash.user,
+started:wash.startTime || null,
+finished:finished,
+plannedMinutes:wash.minutes || null,
+reason:reason
+}
+);
+
+await remove(machineRef);
+
+finishing = false;
+
+}
+
+
+onValue(machineRef,snapshot=>{
+
+currentMachine = snapshot.val();
+
+renderMachine();
+
 });
+
+
+function renderMachine(){
+
+const status =
+document.getElementById("status");
+
+const current =
+document.getElementById("current");
+
+const controls =
+document.getElementById("controls");
+
+if(
+!currentMachine ||
+currentMachine.endTime <= Date.now()
+){
+
+status.textContent="● СВОБОДНА";
+status.classList.remove("busy");
+
+current.classList.add("hidden");
+controls.classList.remove("hidden");
+
+if(currentMachine){
+finishWash(currentMachine,"timer");
+}
+
+return;
+
+}
+
+status.textContent="● ЗАНЯТА";
+status.classList.add("busy");
+
+current.classList.remove("hidden");
+controls.classList.add("hidden");
+
+document.getElementById("currentUser").textContent =
+"Стирает: " + currentMachine.user;
+
+document.getElementById("joke").textContent =
+currentMachine.joke ||
+"Барабан крутится — всё под контролем 🫧";
+
+updateTimer();
+
+}
+
+
+function updateTimer(){
+
+if(!currentMachine) return;
+
+const remaining =
+currentMachine.endTime-Date.now();
+
+if(remaining<=0){
+
+finishWash(currentMachine,"timer");
+
+return;
+}
+
+const seconds =
+Math.ceil(remaining/1000);
+
+const mins =
+Math.floor(seconds/60);
+
+const secs =
+seconds%60;
+
+document.getElementById("timer").textContent =
+String(mins).padStart(2,"0")
++ ":" +
+String(secs).padStart(2,"0");
+
+}
+
+setInterval(updateTimer,1000);
+
+
+document.getElementById("joinQueue").onclick =
+async () => {
+
+const name =
+document.getElementById("queueUser").value;
+
+if(!name){
+alert("Выбери имя 🙂");
+return;
+}
+
+const snap =
+await get(queueRef);
+
+const data =
+snap.val() || {};
+
+if(
+Object.values(data)
+.some(item=>item.user===name)
+){
+
+alert("Ты уже в очереди 🙂");
+return;
+
+}
+
+await push(queueRef,{
+user:name,
+time:Date.now()
+});
+
+};
+
+
+onValue(queueRef,snapshot=>{
+
+const queue =
+document.getElementById("queue");
+
+const data =
+snapshot.val();
+
+queue.innerHTML="";
+
+if(!data){
+
+queue.innerHTML =
+'<div class="empty">Очередь пустая 🎉</div>';
+
+return;
+}
+
+Object.entries(data)
+.sort((a,b)=>a[1].time-b[1].time)
+.forEach(([key,item],index)=>{
+
+const div =
+document.createElement("div");
+
+div.className="queue-item";
+
+div.textContent =
+(index+1)+". "+item.user;
+
+div.onclick = async ()=>{
+
+const ok =
+confirm(
+"Убрать "+item.user+" из очереди?"
+);
+
+if(ok){
+await remove(
+ref(db,"queue/"+key)
+);
+}
+
+};
+
+queue.appendChild(div);
+
+});
+
+});
+
+
+onValue(historyRef,snapshot=>{
+
+const history =
+document.getElementById("history");
+
+const data =
+snapshot.val();
+
+if(!data){
+
+history.innerHTML =
+'<div class="empty">Пока стирок нет</div>';
+
+return;
+}
+
+const items =
+Object.values(data)
+.sort(
+(a,b)=>
+(b.finished||0)-(a.finished||0)
+)
+.slice(0,10);
+
+history.innerHTML="";
+
+items.forEach(item=>{
+
+const div =
+document.createElement("div");
+
+div.className="history-item";
+
+const date =
+new Date(item.finished);
+
+let note="";
+
+if(item.reason==="stopped"){
+note=" · закончил раньше";
+}
+
+div.textContent =
+item.user+
+" — "+
+date.toLocaleString("ru-RU")+
+note;
+
+history.appendChild(div);
+
+});
+
+});
+
 </script>
 
 </body>
