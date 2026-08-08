@@ -2,163 +2,125 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#eaf8ff">
-<title>Стиралка Fresh 6.0</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#e8f8ff">
+<link rel="manifest" href="./manifest.json">
+<title>Стиралка ALAZANA</title>
 
 <style>
 :root{
-  --blue:#35a7ff;
-  --blue2:#6fc8ff;
-  --deep:#0876c9;
-  --ice:#eaf8ff;
-  --white:#ffffff;
-  --ink:#16324a;
-  --muted:#6b8aa0;
-  --green:#19b66d;
+  --sky:#e9f8ff;
+  --blue:#36b8ff;
+  --deep:#087ec4;
+  --ink:#12425f;
+  --muted:#7195aa;
+  --green:#18b86d;
   --red:#ef5350;
-  --orange:#ff9f43;
-  --border:rgba(42,145,210,.15);
-  --shadow:0 18px 50px rgba(69,155,210,.15);
+  --gold:#ffb62e;
+  --glass:rgba(255,255,255,.78);
 }
 
-*{
-  box-sizing:border-box;
-}
-
-html,body{
-  margin:0;
-  min-height:100%;
-}
+*{box-sizing:border-box}
 
 body{
+  margin:0;
+  min-height:100vh;
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
   color:var(--ink);
-
   background:
-    radial-gradient(circle at 15% 5%, rgba(255,255,255,.98), transparent 30%),
-    radial-gradient(circle at 85% 12%, rgba(185,232,255,.9), transparent 34%),
-    linear-gradient(180deg,#e9f8ff 0%,#f8fdff 50%,#edfaff 100%);
-
-  overflow-x:hidden;
+    radial-gradient(circle at 10% 3%,#fff,transparent 27%),
+    radial-gradient(circle at 90% 15%,#ccefff,transparent 36%),
+    linear-gradient(180deg,#e6f7ff,#fbfeff 55%,#eaf9ff);
 }
 
 .sky{
   position:fixed;
   inset:0;
-  pointer-events:none;
   overflow:hidden;
+  pointer-events:none;
   z-index:-1;
 }
 
 .cloud{
   position:absolute;
-  color:white;
-  opacity:.55;
-  filter:blur(.2px);
-  animation:cloudMove linear infinite;
+  opacity:.48;
+  animation:cloud linear infinite;
 }
 
-.cloud.one{
-  top:7%;
-  left:-100px;
-  font-size:72px;
-  animation-duration:28s;
-}
+.cloud:nth-child(1){top:6%;font-size:68px;animation-duration:30s}
+.cloud:nth-child(2){top:35%;font-size:45px;animation-duration:43s;animation-delay:-17s}
+.cloud:nth-child(3){top:72%;font-size:58px;animation-duration:50s;animation-delay:-9s}
 
-.cloud.two{
-  top:31%;
-  left:-150px;
-  font-size:48px;
-  animation-duration:38s;
-  animation-delay:-15s;
-}
-
-.cloud.three{
-  top:67%;
-  left:-180px;
-  font-size:62px;
-  animation-duration:44s;
-  animation-delay:-8s;
-}
-
-@keyframes cloudMove{
-  from{transform:translateX(-160px)}
-  to{transform:translateX(calc(100vw + 260px))}
+@keyframes cloud{
+  from{transform:translateX(-150px)}
+  to{transform:translateX(calc(100vw + 200px))}
 }
 
 .wrap{
   width:min(680px,100%);
   margin:auto;
-  padding:20px 15px 70px;
+  padding:18px 14px 70px;
 }
 
-.header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:4px 3px 17px;
+.hero{
+  text-align:center;
+  margin:7px 0 17px;
 }
 
 .logo{
-  font-size:29px;
+  font-size:31px;
   font-weight:950;
   letter-spacing:-1px;
-  color:#0b629d;
 }
 
-.version{
-  font-size:11px;
-  font-weight:850;
-  letter-spacing:.6px;
-  padding:7px 10px;
-  border-radius:99px;
-  color:#1683c7;
-  background:rgba(255,255,255,.7);
-  border:1px solid rgba(61,173,238,.2);
-  backdrop-filter:blur(12px);
+.sub{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:4px;
+}
+
+.circus{
+  display:flex;
+  justify-content:center;
+  gap:9px;
+  font-size:23px;
+  margin-top:9px;
+}
+
+.circus span{
+  animation:float 3s ease-in-out infinite;
+}
+
+.circus span:nth-child(2){animation-delay:-.7s}
+.circus span:nth-child(3){animation-delay:-1.4s}
+.circus span:nth-child(4){animation-delay:-2s}
+.circus span:nth-child(5){animation-delay:-2.6s}
+
+@keyframes float{
+  50%{transform:translateY(-5px)}
 }
 
 .card{
   position:relative;
   overflow:hidden;
-  border-radius:28px;
-  padding:21px;
   margin-bottom:15px;
-
-  background:
-    linear-gradient(145deg,rgba(255,255,255,.93),rgba(241,251,255,.82));
-
+  padding:21px;
+  border-radius:28px;
+  background:var(--glass);
   border:1px solid rgba(255,255,255,.95);
-
-  box-shadow:
-    var(--shadow),
-    inset 0 1px rgba(255,255,255,1);
-
   backdrop-filter:blur(18px);
-}
-
-.card:before{
-  content:"";
-  position:absolute;
-  width:160px;
-  height:160px;
-  border-radius:50%;
-  background:rgba(113,204,255,.12);
-  top:-80px;
-  right:-60px;
+  box-shadow:
+    0 18px 50px rgba(42,145,200,.14),
+    inset 0 1px #fff;
 }
 
 .status{
-  position:relative;
-  z-index:2;
   display:flex;
   align-items:center;
   gap:9px;
   font-size:14px;
   font-weight:900;
   letter-spacing:.8px;
-  margin-bottom:12px;
 }
 
 .dot{
@@ -166,198 +128,128 @@ body{
   height:10px;
   border-radius:50%;
   background:var(--green);
-  box-shadow:0 0 16px rgba(25,182,109,.55);
+  box-shadow:0 0 14px var(--green);
 }
 
 .busy .dot{
   background:var(--red);
-  box-shadow:0 0 16px rgba(239,83,80,.5);
+  box-shadow:0 0 14px var(--red);
 }
 
 .freeText{color:var(--green)}
 .busyText{color:var(--red)}
 
-.machine-area{
-  display:flex;
-  justify-content:center;
-  padding:4px 0 9px;
-}
-
 .machine{
-  position:relative;
   width:190px;
   height:190px;
+  margin:7px auto;
+  position:relative;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 }
 
-.progressRing{
+.ring{
   position:absolute;
   inset:0;
   border-radius:50%;
-
   background:
     conic-gradient(
-      #42baff calc(var(--progress,0) * 1%),
-      rgba(77,174,230,.13) 0
+      #38b9ff calc(var(--progress,0)*1%),
+      rgba(53,174,231,.13) 0
     );
-
-  box-shadow:
-    0 12px 40px rgba(51,166,230,.16);
-
-  transition:background .7s linear;
+  transition:.7s;
 }
 
-.progressRing:after{
+.ring:after{
   content:"";
   position:absolute;
   inset:10px;
   border-radius:50%;
-
-  background:
-    linear-gradient(145deg,#f9feff,#e4f7ff);
-
-  box-shadow:
-    inset 0 0 25px rgba(64,174,235,.1);
+  background:linear-gradient(145deg,#fff,#e4f7ff);
 }
 
 .drum{
-  position:relative;
   z-index:2;
-  width:142px;
-  height:142px;
-  border-radius:50%;
-
+  width:143px;
+  height:143px;
   overflow:hidden;
-
-  border:8px solid rgba(94,194,246,.32);
-
+  position:relative;
+  border-radius:50%;
+  border:8px solid rgba(49,174,232,.3);
   background:
-    radial-gradient(circle at 32% 25%,#d9f5ff 0,#86d7ff 36%,#279bd6 72%,#1172ad 100%);
-
+    radial-gradient(circle at 30% 25%,#e0f8ff,#80d8ff 38%,#249bd6 73%,#0b6da8);
   box-shadow:
-    inset 0 0 22px rgba(4,78,123,.22),
-    0 10px 32px rgba(55,166,225,.2);
+    inset 0 0 24px rgba(0,72,110,.2),
+    0 12px 30px rgba(37,157,215,.2);
 }
 
 .water{
   position:absolute;
-  left:-10%;
-  bottom:-18%;
-  width:120%;
-  height:57%;
-  border-radius:45% 55% 30% 30%;
-
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.5),rgba(92,202,255,.78));
-
-  animation:waterWave 3.5s ease-in-out infinite;
+  width:125%;
+  height:58%;
+  left:-12%;
+  bottom:-16%;
+  border-radius:45%;
+  background:rgba(186,238,255,.72);
+  animation:water 3s ease-in-out infinite;
 }
 
-@keyframes waterWave{
-  0%,100%{transform:rotate(-3deg) translateY(0)}
-  50%{transform:rotate(4deg) translateY(-4px)}
+@keyframes water{
+  50%{transform:rotate(6deg) translateY(-5px)}
 }
 
 .clothes{
   position:absolute;
   inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  font-size:31px;
+  font-size:30px;
 }
 
-.clothes.spinning{
-  animation:clothesSpin 4.2s linear infinite;
+.clothes.spin{
+  animation:spin 4s linear infinite;
 }
 
-@keyframes clothesSpin{
+@keyframes spin{
   to{transform:rotate(360deg)}
 }
 
-.item{
-  position:absolute;
-  filter:drop-shadow(0 4px 5px rgba(0,70,110,.12));
-}
-
-.item.shirt{
-  transform:translate(-26px,-28px) rotate(-15deg);
-}
-
-.item.underwear{
-  transform:translate(31px,-3px) rotate(18deg);
-}
-
-.item.sock{
-  transform:translate(-14px,35px) rotate(10deg);
-}
-
-.item.towel{
-  transform:translate(29px,38px) rotate(-20deg);
-  font-size:24px;
-}
+.item{position:absolute}
+.shirt{left:29px;top:25px;transform:rotate(-17deg)}
+.pants{right:24px;top:42px;transform:rotate(17deg)}
+.sock{left:43px;bottom:24px}
+.towel{right:28px;bottom:19px;font-size:23px}
 
 .bubble{
   position:absolute;
+  bottom:-15px;
   border-radius:50%;
-  background:rgba(255,255,255,.72);
-  animation:bubbleUp 3.4s ease-in infinite;
+  background:rgba(255,255,255,.8);
+  animation:bubble 3.2s infinite;
 }
 
-.bubble.b1{
-  width:13px;height:13px;
-  left:21px;bottom:15px;
-}
+.b1{width:13px;height:13px;left:17px}
+.b2{width:8px;height:8px;left:53px;animation-delay:-1s}
+.b3{width:18px;height:18px;right:22px;animation-delay:-2s}
 
-.bubble.b2{
-  width:8px;height:8px;
-  left:52px;bottom:4px;
-  animation-delay:-1.2s;
-}
-
-.bubble.b3{
-  width:17px;height:17px;
-  right:24px;bottom:12px;
-  animation-delay:-2s;
-}
-
-.bubble.b4{
-  width:9px;height:9px;
-  right:53px;bottom:0;
-  animation-delay:-.7s;
-}
-
-@keyframes bubbleUp{
-  from{
-    opacity:0;
-    transform:translateY(20px) scale(.7);
-  }
-  30%{opacity:.8}
-  to{
-    opacity:0;
-    transform:translateY(-110px) scale(1.15);
-  }
+@keyframes bubble{
+  from{opacity:0;transform:translateY(0)}
+  25%{opacity:1}
+  to{opacity:0;transform:translateY(-125px)}
 }
 
 .userTitle{
   text-align:center;
   font-size:22px;
   font-weight:950;
-  letter-spacing:-.4px;
-  color:#0a669f;
+  color:#096aa6;
 }
 
 .timer{
-  text-align:center;
   font-size:49px;
   font-weight:950;
-  letter-spacing:-1px;
+  text-align:center;
   font-variant-numeric:tabular-nums;
-  color:#123f5e;
-  margin:4px 0;
+  letter-spacing:-1px;
 }
 
 .progressText{
@@ -369,65 +261,47 @@ body{
 
 .speech{
   min-height:73px;
-  padding:14px 16px;
-  border-radius:19px;
-
+  margin-top:11px;
+  padding:14px;
   display:flex;
-  justify-content:center;
   align-items:center;
-
+  justify-content:center;
   text-align:center;
   line-height:1.4;
-  font-size:16px;
-
-  color:#23658c;
-
-  background:
-    linear-gradient(145deg,rgba(255,255,255,.92),rgba(222,246,255,.86));
-
-  border:1px solid rgba(83,187,241,.19);
-
-  box-shadow:
-    inset 0 1px rgba(255,255,255,1);
-
-  animation:speechPop .35s ease;
+  border-radius:19px;
+  background:linear-gradient(145deg,#fff,#eaf9ff);
+  border:1px solid rgba(47,174,232,.15);
+  color:#266889;
+  animation:pop .3s ease;
 }
 
-@keyframes speechPop{
-  from{
-    opacity:0;
-    transform:translateY(6px) scale(.98);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
+@keyframes pop{
+  from{opacity:0;transform:translateY(6px)}
 }
 
-.speech.final{
-  color:#976011;
-  background:linear-gradient(145deg,#fffaf0,#fff1d7);
-  border-color:rgba(255,170,44,.3);
+.final{
+  background:#fff8e9;
+  color:#926012;
+  border-color:#ffd18a;
 }
 
-.speech.panic{
-  color:#bc3c39;
-  background:linear-gradient(145deg,#fff6f5,#ffe7e5);
-  border-color:rgba(239,83,80,.28);
-  animation:softPulse 1.25s infinite;
+.panic{
+  color:#bb403d;
+  background:#fff0ef;
+  border-color:#ffaaa7;
+  animation:pulse 1.15s infinite;
 }
 
-@keyframes softPulse{
-  0%,100%{transform:scale(1)}
+@keyframes pulse{
   50%{transform:scale(1.015)}
 }
 
 label{
   display:block;
-  margin:16px 0 7px;
+  color:#567b91;
   font-size:14px;
   font-weight:800;
-  color:#51778e;
+  margin:16px 0 7px;
 }
 
 select,button{
@@ -437,118 +311,92 @@ select,button{
 }
 
 select{
-  appearance:none;
   padding:14px;
-  color:#174968;
-
-  background:
-    linear-gradient(145deg,#fff,#f0faff);
-
-  border:1px solid rgba(61,173,238,.2);
-
-  outline:none;
+  background:#fff;
+  color:var(--ink);
+  border:1px solid rgba(47,174,232,.2);
 }
 
 button{
-  border:none;
   padding:15px;
   margin-top:12px;
-
-  font-weight:900;
+  border:none;
   color:white;
-
-  background:
-    linear-gradient(135deg,#54c5ff,#168ddd);
-
-  box-shadow:
-    0 10px 25px rgba(42,159,224,.22);
+  font-weight:900;
+  background:linear-gradient(135deg,#57c7ff,#148bd8);
+  box-shadow:0 9px 24px rgba(26,147,212,.2);
 }
 
-button:active{
-  transform:scale(.985);
-}
+button:active{transform:scale(.985)}
 
 .stop{
-  background:
-    linear-gradient(135deg,#ff7771,#e54743);
-
-  box-shadow:
-    0 10px 25px rgba(228,71,67,.18);
+  background:linear-gradient(135deg,#ff7671,#df4440);
 }
 
-.stopLocked{
-  color:#7391a3;
+.locked{
   background:#edf6fa;
+  color:#7893a4;
   box-shadow:none;
-  border:1px solid #d5eaf4;
 }
 
-.queueBtn{
-  background:
-    linear-gradient(135deg,#6dcaff,#338ee6);
+.notify{
+  background:linear-gradient(135deg,#46c6b7,#209f91);
 }
 
-.sectionTitle{
-  position:relative;
-  z-index:2;
+.title{
   font-size:19px;
   font-weight:900;
-  color:#155e89;
+  color:#155f88;
   margin-bottom:13px;
 }
 
-.hidden{
-  display:none!important;
-}
+.hidden{display:none!important}
 
 .row{
   padding:12px 2px;
-  border-bottom:1px solid rgba(48,151,210,.1);
+  border-bottom:1px solid rgba(45,151,207,.1);
 }
 
-.row:last-child{
-  border-bottom:none;
-}
+.row:last-child{border-bottom:none}
 
 .muted{
-  color:#7d9bad;
+  color:var(--muted);
   font-size:13px;
-}
-
-.queueComment{
-  text-align:center;
-  color:#6f91a5;
-  font-size:14px;
-  padding:12px 0 2px;
-}
-
-.position{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-
-  width:28px;
-  height:28px;
-  border-radius:10px;
-
-  margin-right:8px;
-
-  font-size:13px;
-  font-weight:900;
-
-  color:#1973aa;
-  background:#e4f6ff;
 }
 
 .queueRow{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
+}
+
+.place{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:28px;
+  height:28px;
+  margin-right:7px;
+  border-radius:9px;
+  background:#e3f6ff;
+  color:#1477ad;
+  font-weight:900;
+}
+
+.badge{
+  display:inline-block;
+  margin-top:5px;
+  padding:5px 9px;
+  border-radius:99px;
+  background:#e9f8ff;
+  color:#247598;
+  font-size:11px;
+  font-weight:800;
 }
 
 .leader{
   display:grid;
-  grid-template-columns:42px 1fr auto;
+  grid-template-columns:40px 1fr auto;
   gap:10px;
   align-items:center;
 }
@@ -556,103 +404,31 @@ button:active{
 .rank{
   width:39px;
   height:39px;
+  border-radius:13px;
   display:flex;
-  justify-content:center;
   align-items:center;
-
-  border-radius:14px;
-
-  font-weight:900;
-
-  color:#1472aa;
+  justify-content:center;
   background:#e2f5ff;
-}
-
-.rank.first{
-  background:linear-gradient(145deg,#fff2a8,#ffc956);
-  color:#9b6300;
-}
-
-.leaderName{
   font-weight:900;
-  color:#145b83;
 }
 
-.points{
+.xp{
+  color:#1389c8;
   font-weight:900;
-  color:#168dcc;
 }
 
-.badge{
-  display:inline-block;
-
-  margin-top:5px;
-  padding:5px 9px;
-
-  border-radius:99px;
-
-  font-size:11px;
-  font-weight:800;
-
-  color:#31779d;
-  background:#ebf8ff;
-  border:1px solid rgba(68,176,232,.14);
-}
-
-.levelbar{
-  height:7px;
-  overflow:hidden;
-  border-radius:99px;
-  background:#e2f3fa;
-  margin-top:9px;
-}
-
-.levelbar div{
-  height:100%;
-  border-radius:99px;
-  background:
-    linear-gradient(90deg,#56c8ff,#0d91de);
-}
-
-.notice{
-  text-align:center;
-  margin-top:11px;
-  font-size:12px;
-  color:#87a4b4;
-}
-
-.award{
-  text-align:center;
-}
-
-.awardEmoji{
-  font-size:43px;
-}
-
-.awardName{
-  font-size:20px;
-  font-weight:950;
-  color:#12618d;
-}
-
-.awardDesc{
-  margin-top:7px;
-  color:#7191a4;
-  line-height:1.4;
-}
-
-.freshBurst{
+.fall{
   position:fixed;
-  z-index:9999;
   top:-30px;
   pointer-events:none;
-  animation:burstFall 3.2s linear forwards;
+  z-index:999;
+  animation:fall 3s linear forwards;
 }
 
-@keyframes burstFall{
+@keyframes fall{
   to{
     transform:translateY(110vh) rotate(540deg);
-    opacity:.7;
+    opacity:.6;
   }
 }
 </style>
@@ -661,16 +437,24 @@ button:active{
 <body>
 
 <div class="sky">
-  <div class="cloud one">☁️</div>
-  <div class="cloud two">☁️</div>
-  <div class="cloud three">☁️</div>
+  <div class="cloud">☁️</div>
+  <div class="cloud">☁️</div>
+  <div class="cloud">☁️</div>
 </div>
 
 <div class="wrap">
 
-<div class="header">
-  <div class="logo">🫧 Стиралка</div>
-  <div class="version">FRESH 6.0</div>
+<div class="hero">
+  <div class="logo">🎪 ALAZANA · Стиралка</div>
+  <div class="sub">Fresh Circus Edition</div>
+
+  <div class="circus">
+    <span>🦖</span>
+    <span>⚡</span>
+    <span>🤸‍♀️</span>
+    <span>🤡</span>
+    <span>⭕</span>
+  </div>
 </div>
 
 
@@ -681,32 +465,24 @@ button:active{
   <span id="status" class="freeText">СВОБОДНА</span>
 </div>
 
+<div class="machine">
 
-<div class="machine-area">
+  <div id="ring" class="ring"></div>
 
-  <div class="machine">
+  <div class="drum">
 
-    <div id="ring" class="progressRing"></div>
+    <div class="water"></div>
 
-    <div class="drum">
-
-      <div class="water"></div>
-
-      <div id="clothes" class="clothes">
-
-        <span class="item shirt">👕</span>
-        <span class="item underwear">🩲</span>
-        <span class="item sock">🧦</span>
-        <span class="item towel">🧣</span>
-
-      </div>
-
-      <span class="bubble b1"></span>
-      <span class="bubble b2"></span>
-      <span class="bubble b3"></span>
-      <span class="bubble b4"></span>
-
+    <div id="clothes" class="clothes">
+      <span class="item shirt">👕</span>
+      <span class="item pants">🩲</span>
+      <span class="item sock">🧦</span>
+      <span class="item towel">🧣</span>
     </div>
+
+    <span class="bubble b1"></span>
+    <span class="bubble b2"></span>
+    <span class="bubble b3"></span>
 
   </div>
 
@@ -717,7 +493,7 @@ button:active{
 
   <div id="freeMessage" class="speech"></div>
 
-  <label>Кто сегодня становится чище?</label>
+  <label>Кто сегодня герой чистоты?</label>
 
   <select id="user">
     <option value="">Выбрать имя</option>
@@ -734,7 +510,7 @@ button:active{
     <option>Каспер</option>
   </select>
 
-  <label>На сколько запускаем великое очищение?</label>
+  <label>Сколько вращаем?</label>
 
   <select id="minutes">
     <option value="15">15 минут</option>
@@ -746,12 +522,14 @@ button:active{
   </select>
 
   <button id="startWash">
-    🫧 ЗАПУСТИТЬ СТИРКУ
+    🫧 НАЧАТЬ ВЕЛИКОЕ ОЧИЩЕНИЕ
   </button>
 
-  <div class="notice">
-    Новые стирки должны закончиться до 23:00.
-  </div>
+  <button id="notifyButton" class="notify">
+    🔔 Разрешить мне напомнить о стирке
+  </button>
+
+  <div id="notifyStatus" class="muted" style="text-align:center;margin-top:9px"></div>
 
 </div>
 
@@ -767,11 +545,11 @@ button:active{
   <div id="washMessage" class="speech"></div>
 
   <button id="stopWash" class="stop hidden">
-    ⏹ Я ЗАКОНЧИЛ СТИРКУ
+    ⏹ Я ЗАКОНЧИЛ
   </button>
 
-  <button id="foreignWash" class="stopLocked hidden" disabled>
-    🔒 Остановить может только тот, кто запустил
+  <button id="lockedStop" class="locked hidden" disabled>
+    🔒 STOP доступен только владельцу этой стирки
   </button>
 
 </div>
@@ -780,29 +558,14 @@ button:active{
 
 
 <div id="awardCard" class="card hidden">
-
-  <div class="sectionTitle">
-    🎁 Свежая награда
-  </div>
-
-  <div class="award">
-
-    <div id="awardEmoji" class="awardEmoji"></div>
-
-    <div id="awardName" class="awardName"></div>
-
-    <div id="awardDesc" class="awardDesc"></div>
-
-  </div>
-
+  <div class="title">🎁 Разблокирована награда</div>
+  <div id="award" style="text-align:center"></div>
 </div>
 
 
 <div class="card">
 
-<div class="sectionTitle">
-  👥 Очередь на очищение
-</div>
+<div class="title">👥 Очередь на свежесть</div>
 
 <select id="queueUser">
   <option value="">Выбрать имя</option>
@@ -819,11 +582,12 @@ button:active{
   <option>Каспер</option>
 </select>
 
-<button id="joinQueue" class="queueBtn">
+<button id="joinQueue">
   ➕ ВСТАТЬ В ОЧЕРЕДЬ
 </button>
 
-<div id="queueComment" class="queueComment"></div>
+<div id="queueComment" class="muted"
+     style="text-align:center;margin:11px 0"></div>
 
 <div id="queue"></div>
 
@@ -831,24 +595,14 @@ button:active{
 
 
 <div class="card">
-
-<div class="sectionTitle">
-  🏆 Зал свежей славы
-</div>
-
-<div id="leaders"></div>
-
+  <div class="title">🏆 Чемпионат свежести</div>
+  <div id="leaders"></div>
 </div>
 
 
 <div class="card">
-
-<div class="sectionTitle">
-  📜 Хроники барабана
-</div>
-
-<div id="history"></div>
-
+  <div class="title">📜 Хроники барабана</div>
+  <div id="history"></div>
 </div>
 
 </div>
@@ -871,377 +625,382 @@ import {
 from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAzUWlWuqwKFwhSpBhC8rvH-_U23HH73D0",
-  authDomain: "stiralka-alazana.firebaseapp.com",
-  databaseURL: "https://stiralka-alazana-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "stiralka-alazana",
-  storageBucket: "stiralka-alazana.firebasestorage.app",
-  messagingSenderId: "583128021865",
-  appId: "1:583128021865:web:45a2c120d330ecce9edbf8"
+const firebaseConfig={
+  apiKey:"AIzaSyAzUWlWuqwKFwhSpBhC8rvH-_U23HH73D0",
+  authDomain:"stiralka-alazana.firebaseapp.com",
+  databaseURL:"https://stiralka-alazana-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId:"stiralka-alazana",
+  storageBucket:"stiralka-alazana.firebasestorage.app",
+  messagingSenderId:"583128021865",
+  appId:"1:583128021865:web:45a2c120d330ecce9edbf8"
 };
 
+const app=initializeApp(firebaseConfig);
+const db=getDatabase(app);
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-const machineRef = ref(db,"machine");
-const queueRef = ref(db,"queue");
-const historyRef = ref(db,"history");
-const lastAwardRef = ref(db,"lastAward");
+const machineRef=ref(db,"machine");
+const queueRef=ref(db,"queue");
+const historyRef=ref(db,"history");
+const awardRef=ref(db,"lastAward");
 
 
-/* ====================================
-   ИДЕНТИФИКАТОР УСТРОЙСТВА
-==================================== */
+/* DEVICE OWNER */
 
-let deviceId = localStorage.getItem("stiralkaDeviceId");
+let deviceId=
+  localStorage.getItem("alazanaLaundryDevice");
 
 if(!deviceId){
 
-  deviceId =
-    "device_" +
-    Date.now() +
-    "_" +
+  deviceId=
+    "alazana_"+
+    Date.now()+
+    "_"+
     Math.random()
       .toString(36)
       .slice(2);
 
   localStorage.setItem(
-    "stiralkaDeviceId",
+    "alazanaLaundryDevice",
     deviceId
   );
+}
+
+
+/* PWA + NOTIFICATIONS */
+
+let swRegistration=null;
+
+async function registerSW(){
+
+  if(!("serviceWorker" in navigator))
+    return;
+
+  try{
+
+    swRegistration=
+      await navigator.serviceWorker.register(
+        "./sw.js"
+      );
+
+  }catch(e){
+    console.log(e);
+  }
+
+}
+
+registerSW();
+
+
+async function requestNotifications(){
+
+  if(!("Notification" in window)){
+
+    document.getElementById("notifyStatus")
+      .textContent=
+      "Этот браузер не поддерживает уведомления.";
+
+    return false;
+  }
+
+
+  const permission=
+    await Notification.requestPermission();
+
+
+  if(permission==="granted"){
+
+    document.getElementById("notifyStatus")
+      .textContent=
+      "🔔 Уведомления включены.";
+
+    return true;
+
+  }
+
+
+  document.getElementById("notifyStatus")
+    .textContent=
+    "Уведомления не разрешены.";
+
+  return false;
+}
+
+
+document.getElementById("notifyButton")
+.onclick=requestNotifications;
+
+
+async function notifyOwner(wash){
+
+  if(
+    wash.ownerDeviceId !== deviceId
+  ) return;
+
+
+  const key=
+    "notified_"+wash.startTime;
+
+
+  if(localStorage.getItem(key))
+    return;
+
+
+  if(
+    "Notification" in window &&
+    Notification.permission==="granted"
+  ){
+
+    try{
+
+      const registration=
+        swRegistration ||
+        await navigator.serviceWorker.ready;
+
+
+      await registration.showNotification(
+        "🎪 ALAZANA · Стирка закончена!",
+        {
+          body:
+            `${wash.user}, шоу окончено. Забирай вещи, пока носки не начали новую жизнь 🧦`,
+          tag:
+            "wash-"+wash.startTime,
+          requireInteraction:true
+        }
+      );
+
+
+      localStorage.setItem(
+        key,
+        "1"
+      );
+
+    }catch(e){
+      console.log(e);
+    }
+
+  }
 
 }
 
 
-/* ====================================
-   СВОБОДНА
-==================================== */
+/* PHRASES */
 
-const freePhrases = [
+const freePhrases=[
 
-"Я свободна. Подмигиваю чистым барабаном 🫧",
-"Мои пузырьки скучают. Несите футболки.",
-"Есть свободное окно. И оно пахнет свежестью.",
-"Кто первый — тот сегодня немного ароматнее.",
-"Я уже начистила барабан. Где бельё?",
-"Трусишки сами себя не постирают. Проверено наукой.",
-"Свободна, свежа и готова к серьёзным отношениям с порошком.",
-"Ваши носки всё ещё надеются на спасение.",
-"Пока никто не стирает. Мир явно сошёл с ума.",
-"Барабан пуст. Облачка обеспокоены ☁️",
-"У меня сегодня слишком мало работы. Начинаю скучать.",
-"Ваш выход, футболки 👕",
-"Срочно нужен человек, готовый стать чище.",
-"СВОБОДНА. Потом не говорите, что не видели.",
-"Пена готова. Пузырьки построены.",
-"Если ждали знак — 🧺 вот он.",
-"Один цикл отделяет вас от цивилизации.",
-"Машинка свободна. Министерство свежести подтверждает.",
-"Носки уже спрашивают, когда их очередь.",
-"Я готова вращать. Ты готов загрузить?",
-"Свежесть начинается с одного нажатия.",
-"Очереди нет. Это почти чудо.",
-"Можно заходить без предварительной записи.",
-"Дайте мне хотя бы полотенце.",
-"Стою чистая и без дела. Как-то даже обидно.",
-"Вода готова совершать великие дела.",
-"Ваш гардероб заслуживает обновления.",
-"Могу прямо сейчас сделать кому-то приятно пахнущую жизнь.",
-"Свободная стиралка — пользуйтесь моментом.",
-"Барабан ждёт своего следующего героя."
+"Барабан свободен. Артисты, ваш выход 🎪",
+"Трусишки сами себя не постирают. Даже в цирке.",
+"Динозавры уже готовы. А твои носки? 🦖",
+"Тесла-шоу отдыхает. Сейчас главное электричество — у стиралки ⚡",
+"Свободна. Пена ждёт нового главного героя.",
+"Воздушные гимнасты уже в воздухе. Футболки всё ещё в корзине.",
+"Хула-хупы крутятся. Барабан тоже хочет.",
+"Клоуны спрашивали, почему носки всё ещё грязные 🤡",
+"АЛАЗАНА готова к новому номеру: «Великая стирка».",
+"Есть окно! Не гастрольное — стиральное.",
+"Барабан скучает. Это опасное состояние.",
+"Министерство цирковой свежести вызывает добровольца.",
+"У кого костюм уже сам просится в воду?",
+"СВОБОДНА. Информация подтверждена всеми артистами.",
+"Пена на старте. Порошок нервничает.",
+"Ваш гардероб достоин второго акта.",
+"Заходи. Никакого кастинга.",
+"Пока очередь пуста. Даже подозрительно.",
+"Стиралка готова исполнить свой коронный номер.",
+"Свежесть начинается здесь.",
+"Носки сообщили, что они готовы к переменам.",
+"Сегодня хороший день, чтобы пахнуть лучше, чем реквизит.",
+"Машинка свободна. Используйте редкий исторический момент.",
+"Следующий номер программы — возможно твоя футболка.",
+"Барабан требует работу.",
+"Вода уже репетирует.",
+"Свободно. И никаких антрактов.",
+"Постирай меня. Я для этого и пришла в цирк.",
+"Очередь отсутствует. Чудеса всё-таки существуют.",
+"Кто первый — тот чемпион свежести."
 
 ];
 
 
-/* ====================================
-   ПЕРСОНАЛЬНЫЕ ПРИКОЛЫ
-==================================== */
+const personTemplates=[
 
-const personTemplates = [
-
-"{name} решил стать немного чище.",
-"{name} доверил мне самое дорогое — носки.",
-"{name} официально объявил войну грязному белью.",
-"{name} сегодня ближе к свежести, чем большинство из нас.",
-"{name} отправил гардероб на курорт с пузырьками.",
-"{name} включил режим «хочу пахнуть цивилизованно».",
-"{name} сделал выбор взрослого человека — нажал Старт.",
-"{name} теперь главный герой барабанной драмы.",
-"{name} отправил трусишки в большое путешествие.",
-"{name} вступил в серьёзные отношения с порошком.",
-"{name} решил, что свежесть — лучший аксессуар.",
-"{name} доверился центрифуге. Смело.",
-"{name} повышает общий индекс чистоты коллектива.",
-"{name} проходит путь от «ну нормально» до «о, свеженькое».",
-"{name} сегодня министр чистоты.",
-"{name} отправил футболки на техническое обслуживание.",
-"{name} сейчас буквально вращается вокруг вопроса чистоты.",
-"{name} инвестировал время в хорошие носки.",
-"{name} вступил в активную фазу бытового развития.",
-"{name} запускает реформу собственного гардероба.",
-"{name} решительно приблизился к чистоте.",
-"{name} понял: откладывать эту стирку уже было некуда.",
-"{name} активировал режим свежести.",
-"{name} сейчас улучшает окружающую среду примерно на один комплект одежды.",
-"{name} делает этот коллектив чуть ароматнее.",
-"{name} вошёл в историю. Пока стиральную.",
-"{name} доверил технологии свои трусишки.",
-"{name} выбрал воду. Пена поддержала.",
-"{name} пошёл против грязи.",
-"{name} просто захотел красивой жизни."
+"{name} сегодня главный артист барабана.",
+"{name} вышел на арену против грязных носков.",
+"{name} доверил цирку самое дорогое — трусишки.",
+"{name} запустил шоу «Возвращение свежести».",
+"{name} официально стал ближе к цивилизации.",
+"{name} отправил вещи на водные гастроли.",
+"{name} активировал номер «Пена и центрифуга».",
+"{name} объявил грязи финальный сезон.",
+"{name} инвестировал время в свежесть.",
+"{name} сегодня возглавляет Министерство чистоты.",
+"{name} решил, что запах цирка должен оставаться только на арене.",
+"{name} доверился барабану. Смелый человек.",
+"{name} запустил реформу гардероба.",
+"{name} прямо сейчас становится немного свежее.",
+"{name} вышел против пятен один на один.",
+"{name} отправил носки в большое путешествие.",
+"{name} сейчас главный продюсер этого стирального шоу.",
+"{name} повышает индекс чистоты ALAZANA.",
+"{name} сделал взрослый выбор — нажал «Старт».",
+"{name} отправил гардероб на техническое обслуживание."
 
 ];
 
 
-/* ====================================
-   СТИРАЕТСЯ
-==================================== */
+const washingPhrases=[
 
-const washingPhrases = [
-
-"Футболка кружится. Кажется, ей нравится.",
-"Трусишки проходят ускоренный курс свежести.",
-"Носок уже потерял второго носка. Всё штатно.",
-"Пузырьки работают сверхурочно.",
-"NASA опять следит за центрифугой.",
-"Грязь сопротивляется, но сегодня не её день.",
-"Барабан делает больше оборотов, чем некоторые за неделю.",
-"Всё идёт по плану. План засекречен.",
-"Пена захватила стратегические позиции.",
-"Ваше бельё сейчас находится на водных процедурах.",
-"Носки совершили третий круг почёта.",
-"Технически это стирка. Эмоционально — приключение.",
-"Вещи слегка в шоке, но становятся чище.",
-"Система работает. Трусишки под контролем.",
-"Идёт генеральная репетиция свежести.",
-"Порошок ведёт по очкам.",
-"Грязь уже просит переговоров.",
-"Футболка говорит, что всё нормально.",
-"Центрифуга выглядит подозрительно довольной.",
-"Идёт глубокая модернизация гардероба.",
-"Пузырьки сообщают: прогресс есть.",
-"Это не шум. Это звук свежего будущего.",
-"Барабан работает. Артисты отдыхают.",
-"Одежда проходит личностный рост.",
-"Один носок сейчас смотрит на жизнь совсем иначе.",
-"Свежесть медленно захватывает территорию.",
-"Вода и порошок нашли общий язык.",
-"Стирка продолжает удивлять физиков.",
-"Внутри больше движения, чем на репетиции.",
-"Машинка делает то, ради чего пришла в этот мир."
+"🦖 Динозавр следит за барабаном. Пока всё спокойно.",
+"⚡ Тесла-шоу сообщает: напряжение свежести растёт.",
+"🤡 Клоуны утверждают, что один носок уже исчез.",
+"🤸‍♀️ Воздушные гимнасты выше. Пена пока ниже.",
+"⭕ Хула-хупы крутятся. Барабан не отстаёт.",
+"Сегодня на арене: порошок против грязи.",
+"Футболка исполняет тройное вращение.",
+"Трусишки проходят серьёзную профессиональную подготовку.",
+"NASA подключилось к трансляции центрифуги.",
+"Барабан делает больше оборотов, чем некоторые артисты.",
+"Грязь просит антракт. Ей отказали.",
+"Пена уверенно держит арену.",
+"Один носок перестал выходить на связь.",
+"Вещи сейчас немного в шоке, но всё по плану.",
+"Это не шум. Это аплодисменты чистоте.",
+"Порошок вышел на арену очень уверенно.",
+"Идёт техническая репетиция свежести.",
+"Барабан выполняет номер без страховки.",
+"Чистота постепенно захватывает манеж.",
+"Носки проходят личностный рост.",
+"Вода сегодня главный режиссёр.",
+"Центрифуга набирает драматургию.",
+"Система работает штатно. Клоунов пока не вызываем.",
+"АЛАЗАНА продолжает великий цикл очищения.",
+"Внутри барабана событий больше, чем за кулисами."
 
 ];
 
 
-/* ====================================
-   ПОСЛЕДНИЕ 15 МИН
-==================================== */
+const finalPhrases=[
 
-const finalPhrases = [
-
-"Ещё немного — можно искать тазик.",
-"Свежесть уже видна на горизонте.",
-"Футболки готовятся к выходу.",
-"Бельё почти прошло весь путь героя.",
-"Трусишки уже собирают чемоданы.",
-"Последние минуты водного курорта.",
-"Грязь готовит капитуляцию.",
-"Барабан начинает думать о пенсии.",
-"Следующий артист может постепенно готовиться.",
-"Почти всё. Не торопите пузырьки.",
-"Финишная прямая пахнет порошком.",
-"Машинка оформляет документы на освобождение вещей.",
-"Носки скоро увидят внешний мир.",
-"Юридически всё уже почти чистое.",
+"До финала 15 минут. Следующий артист может готовиться.",
+"Финальные титры уже близко.",
+"Футболки собираются на поклон.",
+"Носки готовятся покинуть арену.",
+"Грязь уже подписывает капитуляцию.",
+"Барабан выходит на финальный номер.",
+"Тазик можно постепенно доставать.",
+"Последний акт водной драмы.",
+"Следующий номер программы скоро начнётся.",
+"Пена завершает выступление.",
 "Красную дорожку для белья можно готовить.",
-"Финальные обороты начинаются.",
-"Можно постепенно подходить. Но без паники.",
-"Стирка скоро станет историей.",
-"Остался последний акт бытовой драмы.",
-"Вещи уже мысленно на сушилке.",
-"Порошок почти закончил свою смену.",
-"Следующий в очереди — не теряем бдительность.",
-"Свежесть уже совсем рядом.",
-"Ещё немного великого вращения.",
-"Барабан готовится передать власть.",
-"Почти готово. Терпение.",
-"Система выходит на финиш.",
-"Вещи почти официально реабилитированы.",
-"Последний рывок.",
-"Скоро снова будет СВОБОДНА."
+"Вещи уже спрашивают: «Когда домой?»",
+"Финальный рывок.",
+"Возвращение в гардероб всё ближе.",
+"Скоро машинка снова станет достоянием коллектива."
 
 ];
 
 
-/* ====================================
-   ПОСЛЕДНИЕ 3 МИН
-==================================== */
+const panicPhrases=[
 
-const panicPhrases = [
-
-"🚨 ТАЗИКИ НА СТАРТ!",
-"ТРИ МИНУТЫ. ТРУСИШКИ ВЫХОДЯТ!",
-"Носки требуют освобождения.",
-"Футболки уже стоят возле люка.",
-"Красная тревога свежести.",
-"Барабан передаёт полномочия.",
+"🚨 ТРИ МИНУТЫ! ТАЗИК НА СТАРТ!",
+"🤡 Даже клоуны перестали смеяться. Финал близко.",
+"🦖 Динозавр требует освободить машинку.",
+"⚡ Финальное напряжение!",
+"🎪 ПОСЛЕДНИЙ НОМЕР!",
+"Носки уже стоят у выхода.",
+"Трусишки требуют немедленного освобождения.",
+"Следующий артист — приготовиться!",
 "Проверяем корзины. Проверяем нервы.",
-"ПОЧТИ ВСЁ. НЕ ТРОГАТЬ.",
-"Очередь, приготовиться!",
-"Вещи уже видят свободу.",
-"Последние обороты.",
-"Пузырьки заканчивают смену.",
-"Люк чувствует приближение открытия.",
-"Следующий герой, разминайтесь.",
-"Трусишки морально готовы покинуть барабан.",
-"Ещё немного!",
-"Миссия почти завершена.",
-"Система выходит на посадку.",
-"Вода покидает чат.",
-"ФИНАЛ БЛИЗКО."
+"Пузырьки покидают сцену.",
+"Барабан передаёт полномочия.",
+"Люк морально готов открыться.",
+"Вещи уже почти свободны.",
+"ФИНАЛ БЛИЗКО.",
+"Вода покидает чат."
 
 ];
 
 
-const queuePhrases = [
+const queuePhrases=[
 
-"Пока всё культурно.",
-"Очередь приобретает социальное значение.",
-"Начинается чемпионат по ожиданию.",
-"Машинка одна. Желающих несколько. Математика жестока.",
-"Просьба места не продавать.",
-"Филиал МФЦ открыт.",
-"Тазики сохраняют нейтралитет.",
-"Очередь растёт. Совет директоров обеспокоен.",
-"Ведётся регистрация желающих стать чище.",
-"Главное — без революции возле барабана."
+"Очередь формируется. Без продажи мест.",
+"Начинается цирковой чемпионат ожидания.",
+"Машинка одна. Артистов много.",
+"Просьба без акробатики возле барабана.",
+"Очередь официально приобрела социальное значение.",
+"Клоуны предлагают жеребьёвку. Мы пока против.",
+"Очередь растёт. Совет директоров барабана обеспокоен.",
+"Следующие артисты готовятся к выходу."
 
 ];
 
 
-function randomFrom(arr){
-  return arr[
-    Math.floor(
-      Math.random()*arr.length
-    )
-  ];
+function randomFrom(a){
+  return a[Math.floor(Math.random()*a.length)];
 }
 
-function personPhrase(name){
+function personal(name){
   return randomFrom(personTemplates)
     .replaceAll("{name}",name);
 }
 
 
-/* ====================================
-   НАГРАДЫ
-==================================== */
+/* AWARDS */
 
-const awardAdjectives = [
-  "Начинающий",
-  "Уверенный",
-  "Опытный",
-  "Отважный",
-  "Заслуженный",
-  "Элитный",
-  "Эпический",
-  "Легендарный",
-  "Мифический",
-  "Абсолютный"
+const awardNames=[
+"Чистый носок",
+"Друг порошка",
+"Укротитель барабана",
+"Спасатель трусишек",
+"Повелитель футболки",
+"Магистр пены",
+"Барон свежести",
+"Император центрифуги",
+"Легенда белья",
+"Владыка чистоты"
 ];
 
-const awardNouns = [
-  "Спасатель носков",
-  "Укротитель пены",
-  "Повелитель барабана",
-  "Хранитель трусишек",
-  "Командор футболки",
-  "Магистр полотенца",
-  "Барон свежести",
-  "Император порошка",
-  "Архитектор чистоты",
-  "Владыка центрифуги"
-];
-
-const awardEmojis = [
-  "🧦","🫧","🌀","🩲","👕",
-  "🧺","✨","🧼","🏆","👑"
+const awardEmoji=[
+"🧦","🫧","🌀","🩲","👕",
+"🧼","✨","🎪","🏆","👑"
 ];
 
 
-function awardFor(count){
+function awardFor(n){
 
-  if(count>=100){
+  if(n>=100)
     return{
       emoji:"👑",
       name:"СУПЕР-БОСС СТИРКИ",
-      desc:"100 стирок. Барабан официально признаёт твою власть."
+      desc:"100 стирок. Барабан склоняется перед тобой."
     };
-  }
 
-  const n=Math.max(1,count);
 
-  const a=
-    Math.floor((n-1)/10);
-
-  const b=
-    (n-1)%10;
+  const level=Math.max(1,n);
 
   return{
-    emoji:awardEmojis[b],
+    emoji:awardEmoji[(level-1)%10],
     name:
-      awardAdjectives[a]+
-      " "+
-      awardNouns[b],
-
+      awardNames[(level-1)%10]+
+      " · уровень "+level,
     desc:
-      "Награда №"+
-      n+
-      ". Ещё один шаг к абсолютной свежести."
+      `Награда №${level}. Путь свежести продолжается.`
   };
 
 }
 
 
-function pointsFor(item){
-
-  let points=100;
-
-  points+=
-    Number(
-      item.actualMinutes ||
-      item.plannedMinutes ||
-      0
-    );
-
-  if(item.reason==="timer"){
-    points+=50;
-  }
-
-  return points;
-
-}
-
-
-/* ====================================
-   STATE
-==================================== */
+/* STATE */
 
 let currentMachine=null;
+let allHistory={};
 let finishing=false;
 
-let currentMode="";
-let currentPhrase="";
-let lastPhraseChange=0;
-
-let allHistory={};
+let phrase="";
+let phraseMode="";
+let phraseTime=0;
 
 
-/* ====================================
-   START
-==================================== */
+/* START */
 
 document.getElementById("startWash")
 .onclick=async()=>{
@@ -1250,32 +1009,36 @@ document.getElementById("startWash")
     document.getElementById("user").value;
 
   const minutes=
-    Number(
-      document.getElementById("minutes").value
-    );
+    Number(document.getElementById("minutes").value);
+
 
   if(!name){
-    alert("Выбери своё имя 🙂");
+    alert("Сначала выбери имя 🙂");
     return;
+  }
+
+
+  if(
+    "Notification" in window &&
+    Notification.permission==="default"
+  ){
+    await requestNotifications();
   }
 
 
   const now=new Date();
 
-  const finishDate=
-    new Date(
-      Date.now()+
-      minutes*60000
-    );
+  const finish=
+    new Date(Date.now()+minutes*60000);
 
 
   if(
-    finishDate.getDate() !== now.getDate() ||
-    finishDate.getHours() >= 23
+    finish.getDate()!==now.getDate() ||
+    finish.getHours()>=23
   ){
 
     alert(
-      "Эта стирка закончится после 23:00. Профсоюз трусишек против 😴"
+      "Эта стирка закончится после 23:00. Даже барабану нужен отдых 😴"
     );
 
     return;
@@ -1285,25 +1048,18 @@ document.getElementById("startWash")
   const snap=
     await get(machineRef);
 
-  const existing=
-    snap.val();
+  const old=snap.val();
 
 
-  if(
-    existing &&
-    existing.endTime>Date.now()
-  ){
+  if(old && old.endTime>Date.now()){
 
-    alert(
-      "Машинка уже занята чужим бельём 🙂"
-    );
+    alert("Поздно. На арене уже другой артист.");
 
     return;
   }
 
 
-  const startTime=
-    Date.now();
+  const startTime=Date.now();
 
 
   await set(machineRef,{
@@ -1325,9 +1081,7 @@ document.getElementById("startWash")
 };
 
 
-/* ====================================
-   STOP
-==================================== */
+/* STOP */
 
 document.getElementById("stopWash")
 .onclick=async()=>{
@@ -1338,23 +1092,14 @@ document.getElementById("stopWash")
   if(
     currentMachine.ownerDeviceId !==
     deviceId
-  ){
-
-    alert(
-      "Эту стирку запускал не ты 😄"
-    );
-
-    return;
-  }
+  )return;
 
 
-  const ok=
-    confirm(
-      "Точно закончил раньше? Барабан всё запомнит 😄"
-    );
-
-
-  if(!ok)return;
+  if(
+    !confirm(
+      "Точно закончил? Комиссия барабана всё зафиксирует 😄"
+    )
+  )return;
 
 
   await finishWash(
@@ -1365,74 +1110,56 @@ document.getElementById("stopWash")
 };
 
 
-/* ====================================
-   FINISH
-==================================== */
+/* FINISH */
 
-async function finishWash(
-  wash,
-  reason
-){
+async function finishWash(wash,reason){
 
-  if(
-    finishing ||
-    !wash
-  )return;
-
+  if(finishing || !wash)return;
 
   finishing=true;
 
 
-  const finished=
-    Date.now();
+  if(reason==="timer")
+    await notifyOwner(wash);
+
+
+  const finished=Date.now();
+
+
+  const previous=
+    Object.values(allHistory)
+      .filter(x=>x.user===wash.user);
+
+
+  const number=
+    previous.length+1;
+
+
+  const award=
+    awardFor(number);
 
 
   const actualMinutes=
     Math.max(
       1,
       Math.round(
-        (
-          finished -
-          wash.startTime
-        ) /
+        (finished-wash.startTime)/
         60000
       )
-    );
-
-
-  const previous=
-    Object.values(allHistory)
-      .filter(
-        x=>x.user===wash.user
-      );
-
-
-  const washNumber=
-    previous.length+1;
-
-
-  const award=
-    awardFor(washNumber);
-
-
-  const id=
-    String(
-      wash.startTime ||
-      finished
     );
 
 
   await set(
     ref(
       db,
-      "history/"+id
+      "history/"+
+      wash.startTime
     ),
     {
 
       user:wash.user,
 
-      started:
-        wash.startTime,
+      started:wash.startTime,
 
       finished,
 
@@ -1442,8 +1169,6 @@ async function finishWash(
       actualMinutes,
 
       reason,
-
-      washNumber,
 
       awardName:
         award.name,
@@ -1456,17 +1181,11 @@ async function finishWash(
 
 
   await set(
-    lastAwardRef,
+    awardRef,
     {
-
       user:wash.user,
-
-      time:finished,
-
-      washNumber,
-
-      ...award
-
+      ...award,
+      time:finished
     }
   );
 
@@ -1474,7 +1193,7 @@ async function finishWash(
   await remove(machineRef);
 
 
-  freshCelebration();
+  celebrate();
 
 
   finishing=false;
@@ -1482,81 +1201,90 @@ async function finishWash(
 }
 
 
-/* ====================================
-   MACHINE
-==================================== */
+/* MACHINE */
 
-onValue(
-  machineRef,
-  snapshot=>{
+onValue(machineRef,s=>{
 
-    currentMachine=
-      snapshot.val();
+  currentMachine=s.val();
 
-    currentMode="";
-    currentPhrase="";
-    lastPhraseChange=0;
+  phrase="";
+  phraseMode="";
+  phraseTime=0;
 
-    renderMachine();
+  renderMachine();
 
-  }
-);
+});
 
 
 function renderMachine(){
 
-  const statusBox=
-    document.getElementById("statusBox");
-
-  const status=
-    document.getElementById("status");
-
-  const freeArea=
-    document.getElementById("freeArea");
-
-  const busyArea=
-    document.getElementById("busyArea");
-
-  const clothes=
-    document.getElementById("clothes");
-
-  const stop=
-    document.getElementById("stopWash");
-
-  const locked=
-    document.getElementById("foreignWash");
+  const busy=
+    currentMachine &&
+    currentMachine.endTime>Date.now();
 
 
-  if(
-    !currentMachine ||
-    currentMachine.endTime<=Date.now()
-  ){
+  document
+    .getElementById("statusBox")
+    .classList.toggle(
+      "busy",
+      busy
+    );
 
-    statusBox.classList.remove("busy");
 
-    status.textContent=
-      "СВОБОДНА";
+  document
+    .getElementById("status")
+    .textContent=
+      busy
+      ?"ЗАНЯТА"
+      :"СВОБОДНА";
 
-    status.className=
-      "freeText";
 
-    freeArea.classList.remove("hidden");
+  document
+    .getElementById("status")
+    .className=
+      busy
+      ?"busyText"
+      :"freeText";
 
-    busyArea.classList.add("hidden");
 
-    clothes.classList.remove("spinning");
+  document
+    .getElementById("freeArea")
+    .classList.toggle(
+      "hidden",
+      busy
+    );
 
+
+  document
+    .getElementById("busyArea")
+    .classList.toggle(
+      "hidden",
+      !busy
+    );
+
+
+  document
+    .getElementById("clothes")
+    .classList.toggle(
+      "spin",
+      busy
+    );
+
+
+  if(!busy){
 
     document
       .getElementById("ring")
-      .style
-      .setProperty(
+      .style.setProperty(
         "--progress",
         0
       );
 
 
-    if(currentMachine){
+    if(
+      currentMachine &&
+      currentMachine.endTime<=Date.now()
+    ){
 
       finishWash(
         currentMachine,
@@ -1579,26 +1307,10 @@ function renderMachine(){
   }
 
 
-  statusBox.classList.add("busy");
-
-  status.textContent=
-    "ЗАНЯТА";
-
-  status.className=
-    "busyText";
-
-
-  freeArea.classList.add("hidden");
-
-  busyArea.classList.remove("hidden");
-
-  clothes.classList.add("spinning");
-
-
   document
     .getElementById("currentUser")
     .textContent=
-      personPhrase(
+      personal(
         currentMachine.user
       );
 
@@ -1608,16 +1320,20 @@ function renderMachine(){
     deviceId;
 
 
-  stop.classList.toggle(
-    "hidden",
-    !mine
-  );
+  document
+    .getElementById("stopWash")
+    .classList.toggle(
+      "hidden",
+      !mine
+    );
 
 
-  locked.classList.toggle(
-    "hidden",
-    mine
-  );
+  document
+    .getElementById("lockedStop")
+    .classList.toggle(
+      "hidden",
+      mine
+    );
 
 
   updateTimer();
@@ -1625,21 +1341,19 @@ function renderMachine(){
 }
 
 
-/* ====================================
-   TIMER
-==================================== */
+/* TIMER */
 
 function updateTimer(){
 
   if(!currentMachine)return;
 
 
-  const remaining=
+  const left=
     currentMachine.endTime-
     Date.now();
 
 
-  if(remaining<=0){
+  if(left<=0){
 
     finishWash(
       currentMachine,
@@ -1652,18 +1366,12 @@ function updateTimer(){
 
 
   const seconds=
-    Math.ceil(
-      remaining/1000
-    );
+    Math.ceil(left/1000);
 
+  const m=
+    Math.floor(seconds/60);
 
-  const mins=
-    Math.floor(
-      seconds/60
-    );
-
-
-  const secs=
+  const s=
     seconds%60;
 
 
@@ -1671,13 +1379,9 @@ function updateTimer(){
     .getElementById("timer")
     .textContent=
 
-      String(mins)
-      .padStart(2,"0")
-      +
-      ":"
-      +
-      String(secs)
-      .padStart(2,"0");
+      String(m).padStart(2,"0")
+      +":"+
+      String(s).padStart(2,"0");
 
 
   const total=
@@ -1685,25 +1389,22 @@ function updateTimer(){
     60000;
 
 
-  const elapsed=
-    total-
-    remaining;
-
-
   const progress=
-    Math.min(
-      100,
-      Math.max(
-        0,
-        elapsed/total*100
+    Math.max(
+      0,
+      Math.min(
+        100,
+        (
+          (total-left)/
+          total
+        )*100
       )
     );
 
 
   document
     .getElementById("ring")
-    .style
-    .setProperty(
+    .style.setProperty(
       "--progress",
       progress
     );
@@ -1713,47 +1414,25 @@ function updateTimer(){
     .getElementById("progressText")
     .textContent=
 
-      Math.round(progress)+
-      "% пути к абсолютной свежести";
+      `${Math.round(progress)}% номера уже позади`;
 
 
-  let mode=
-    "washing";
+  let mode="normal";
 
 
-  if(
-    remaining<=
-    3*60*1000
-  ){
-
+  if(left<=3*60000)
     mode="panic";
 
-  }
-
-  else if(
-    remaining<=
-    15*60*1000
-  ){
-
+  else if(left<=15*60000)
     mode="final";
-
-  }
-
-
-  const now=
-    Date.now();
 
 
   if(
-    mode!==currentMode ||
-    !currentPhrase ||
-    now-lastPhraseChange>
+    mode!==phraseMode ||
+    !phrase ||
+    Date.now()-phraseTime>
     18000
   ){
-
-    currentMode=
-      mode;
-
 
     const box=
       document.getElementById(
@@ -1763,7 +1442,7 @@ function updateTimer(){
 
     if(mode==="panic"){
 
-      currentPhrase=
+      phrase=
         randomFrom(
           panicPhrases
         );
@@ -1773,11 +1452,9 @@ function updateTimer(){
 
     }
 
-    else if(
-      mode==="final"
-    ){
+    else if(mode==="final"){
 
-      currentPhrase=
+      phrase=
         randomFrom(
           finalPhrases
         );
@@ -1789,7 +1466,7 @@ function updateTimer(){
 
     else{
 
-      currentPhrase=
+      phrase=
         randomFrom(
           washingPhrases
         );
@@ -1800,25 +1477,20 @@ function updateTimer(){
     }
 
 
-    box.textContent=
-      currentPhrase;
+    box.textContent=phrase;
 
+    phraseMode=mode;
 
-    lastPhraseChange=
-      now;
+    phraseTime=
+      Date.now();
 
   }
 
 }
 
 
-setInterval(
-  updateTimer,
-  1000
-);
+setInterval(updateTimer,1000);
 
-
-/* новая свободная фраза */
 
 setInterval(()=>{
 
@@ -1827,21 +1499,16 @@ setInterval(()=>{
     document
       .getElementById("freeMessage")
       .textContent=
-        randomFrom(
-          freePhrases
-        );
+      randomFrom(freePhrases);
 
   }
 
 },20000);
 
 
-/* ====================================
-   QUEUE
-==================================== */
+/* QUEUE */
 
-document
-.getElementById("joinQueue")
+document.getElementById("joinQueue")
 .onclick=async()=>{
 
   const name=
@@ -1850,20 +1517,11 @@ document
       .value;
 
 
-  if(!name){
-
-    alert(
-      "Выбери себя 🙂"
-    );
-
-    return;
-
-  }
+  if(!name)return;
 
 
   const snap=
     await get(queueRef);
-
 
   const data=
     snap.val()||{};
@@ -1871,120 +1529,115 @@ document
 
   if(
     Object.values(data)
-    .some(
-      x=>x.user===name
-    )
+      .some(
+        x=>x.user===name
+      )
   ){
 
-    alert(
-      "Ты уже в очереди 👀"
-    );
+    alert("Ты уже в очереди.");
 
     return;
-
   }
 
 
   await push(
     queueRef,
     {
-
       user:name,
-
-      time:
-        Date.now()
-
+      time:Date.now(),
+      ownerDeviceId:deviceId
     }
   );
 
 };
 
 
-onValue(
-  queueRef,
-  snapshot=>{
+onValue(queueRef,s=>{
 
-    const data=
-      snapshot.val();
+  const data=s.val();
 
-
-    const queue=
-      document
-        .getElementById("queue");
+  const box=
+    document.getElementById(
+      "queue"
+    );
 
 
-    queue.innerHTML="";
+  box.innerHTML="";
 
 
-    if(!data){
-
-      queue.innerHTML=
-        '<div class="muted">Очередь пустая. Свежая социальная гармония.</div>';
-
-      document
-        .getElementById("queueComment")
-        .textContent="";
-
-      return;
-
-    }
+  const comment=
+    document.getElementById(
+      "queueComment"
+    );
 
 
-    const items=
-      Object.entries(data)
-        .sort(
-          (a,b)=>
-            a[1].time-
-            b[1].time
+  if(!data){
+
+    box.innerHTML=
+      '<div class="muted">Очередь пустая. Даже немного подозрительно.</div>';
+
+    comment.textContent="";
+
+    return;
+
+  }
+
+
+  const items=
+    Object.entries(data)
+      .sort(
+        (a,b)=>
+        a[1].time-b[1].time
+      );
+
+
+  comment.textContent=
+    items.length>1
+    ?randomFrom(queuePhrases)
+    :"Один артист ждёт следующего выхода.";
+
+
+  items.forEach(
+    ([key,item],i)=>{
+
+      const row=
+        document.createElement(
+          "div"
         );
 
 
-    document
-      .getElementById("queueComment")
-      .textContent=
-
-        items.length>1
-        ?
-        randomFrom(queuePhrases)
-        :
-        "Один человек ждёт. Пока всё культурно.";
+      row.className=
+        "row queueRow";
 
 
-    items.forEach(
-      ([key,item],i)=>{
-
-        const row=
-          document.createElement(
-            "div"
-          );
-
-        row.className=
-          "row queueRow";
+      const mine=
+        item.ownerDeviceId===
+        deviceId;
 
 
-        row.innerHTML=
-          `
-          <div>
-            <span class="position">
-              ${i+1}
-            </span>
-            <b>${item.user}</b>
-          </div>
-
-          <span class="muted">
-            нажми — убрать
+      row.innerHTML=
+        `
+        <div>
+          <span class="place">
+            ${i+1}
           </span>
-          `;
+          <b>${item.user}</b>
+        </div>
 
+        <span class="muted">
+          ${mine?"нажми — выйти":""}
+        </span>
+        `;
+
+
+      if(mine){
 
         row.onclick=
           async()=>{
 
             if(
               confirm(
-                "Убрать "+
-                item.user+
-                " из очереди?"
+                "Выйти из очереди?"
               )
             ){
 
@@ -1999,35 +1652,28 @@ onValue(
 
           };
 
-
-        queue.appendChild(
-          row
-        );
-
       }
-    );
-
-  }
-);
 
 
-/* ====================================
-   HISTORY + LEADERBOARD
-==================================== */
+      box.appendChild(row);
 
-onValue(
-  historyRef,
-  snapshot=>{
+    }
+  );
 
-    allHistory=
-      snapshot.val()||{};
+});
 
-    renderHistory();
 
-    renderLeaders();
+/* HISTORY */
 
-  }
-);
+onValue(historyRef,s=>{
+
+  allHistory=
+    s.val()||{};
+
+  renderHistory();
+  renderLeaders();
+
+});
 
 
 function renderHistory(){
@@ -2039,138 +1685,103 @@ function renderHistory(){
 
 
   const items=
-    Object.values(
-      allHistory
-    )
-    .sort(
-      (a,b)=>
+    Object.values(allHistory)
+      .sort(
+        (a,b)=>
         (b.finished||0)-
         (a.finished||0)
-    )
-    .slice(0,12);
+      )
+      .slice(0,12);
 
 
   if(!items.length){
 
     box.innerHTML=
-      '<div class="muted">История пока чиста.</div>';
+      '<div class="muted">Пока ни одного номера.</div>';
 
     return;
-
   }
 
 
   box.innerHTML="";
 
 
-  items.forEach(
-    item=>{
+  items.forEach(item=>{
 
-      const row=
-        document.createElement(
-          "div"
-        );
-
-
-      row.className=
-        "row";
+    const row=
+      document.createElement(
+        "div"
+      );
 
 
-      const date=
-        new Date(
-          item.finished
-        )
-        .toLocaleString(
-          "ru-RU"
-        );
+    row.className="row";
 
 
-      const note=
-        item.reason==="stopped"
-        ?
-        " · закончил раньше"
-        :
-        " · выдержал до конца 🫡";
+    row.innerHTML=
+      `
+      <b>${item.user}</b>
+
+      <div class="muted">
+        ${new Date(item.finished)
+          .toLocaleString("ru-RU")}
+      </div>
+
+      <span class="badge">
+        ${item.awardEmoji||"🏆"}
+        ${item.awardName||"Награда"}
+      </span>
+      `;
 
 
-      row.innerHTML=
-        `
-        <b>${item.user}</b>
+    box.appendChild(row);
 
-        <div class="muted">
-          ${date}${note}
-        </div>
-
-        <span class="badge">
-          ${item.awardEmoji||"🏆"}
-          ${item.awardName||"Награда"}
-        </span>
-        `;
-
-
-      box.appendChild(row);
-
-    }
-  );
+  });
 
 }
 
+
+/* LEADERS */
 
 function renderLeaders(){
 
   const users={};
 
 
-  Object.values(
-    allHistory
-  )
-  .forEach(
-    item=>{
+  Object.values(allHistory)
+    .forEach(x=>{
 
-      if(!item.user)return;
-
-
-      if(
-        !users[item.user]
-      ){
-
-        users[item.user]={
+      if(!users[x.user])
+        users[x.user]={
           washes:0,
-          minutes:0,
           points:0
         };
 
-      }
+
+      users[x.user].washes++;
 
 
-      const user=
-        users[item.user];
-
-
-      user.washes++;
-
-
-      user.minutes+=
+      users[x.user].points+=
+        100+
         Number(
-          item.actualMinutes||
-          item.plannedMinutes||
+          x.actualMinutes||
+          x.plannedMinutes||
           0
+        )+
+        (
+          x.reason==="timer"
+          ?50
+          :0
         );
 
-
-      user.points+=
-        pointsFor(item);
-
-    }
-  );
+    });
 
 
-  const ranking=
+  const list=
     Object.entries(users)
       .sort(
         (a,b)=>
-          b[1].points-
-          a[1].points
+        b[1].points-
+        a[1].points
       );
 
 
@@ -2180,10 +1791,10 @@ function renderLeaders(){
     );
 
 
-  if(!ranking.length){
+  if(!list.length){
 
     box.innerHTML=
-      '<div class="muted">Чемпионат свежести ещё не начался.</div>';
+      '<div class="muted">Чемпионат ещё не начался.</div>';
 
     return;
 
@@ -2193,14 +1804,8 @@ function renderLeaders(){
   box.innerHTML="";
 
 
-  ranking.forEach(
-    ([name,data],i)=>{
-
-      const award=
-        awardFor(
-          data.washes
-        );
-
+  list.forEach(
+    ([name,x],i)=>{
 
       const row=
         document.createElement(
@@ -2212,52 +1817,34 @@ function renderLeaders(){
         "row leader";
 
 
-      let place=i+1;
-
-      if(i===0)place="👑";
-      if(i===1)place="🥈";
-      if(i===2)place="🥉";
+      const rank=
+        i===0?"👑":
+        i===1?"🥈":
+        i===2?"🥉":
+        i+1;
 
 
       row.innerHTML=
         `
-        <div class="rank ${i===0?"first":""}">
-          ${place}
+        <div class="rank">
+          ${rank}
         </div>
 
         <div>
-
-          <div class="leaderName">
-            ${name}
-          </div>
+          <b>${name}</b>
 
           <div class="muted">
-            ${data.washes} стирок ·
-            ${data.minutes} минут
+            ${x.washes} стирок
           </div>
-
-          <span class="badge">
-            ${award.emoji}
-            ${award.name}
-          </span>
-
-          <div class="levelbar">
-            <div
-              style="width:${Math.min(100,data.washes)}%">
-            </div>
-          </div>
-
         </div>
 
-        <div class="points">
-          ${data.points} XP
+        <div class="xp">
+          ${x.points} XP
         </div>
         `;
 
 
-      box.appendChild(
-        row
-      );
+      box.appendChild(row);
 
     }
   );
@@ -2265,86 +1852,67 @@ function renderLeaders(){
 }
 
 
-/* ====================================
-   LAST AWARD
-==================================== */
+/* AWARD */
 
-onValue(
-  lastAwardRef,
-  snapshot=>{
+onValue(awardRef,s=>{
 
-    const award=
-      snapshot.val();
+  const a=s.val();
 
-
-    const card=
-      document.getElementById(
-        "awardCard"
-      );
-
-
-    if(!award){
-
-      card.classList.add(
-        "hidden"
-      );
-
-      return;
-
-    }
-
-
-    card.classList.remove(
-      "hidden"
+  const card=
+    document.getElementById(
+      "awardCard"
     );
 
 
-    document
-      .getElementById("awardEmoji")
-      .textContent=
-        award.emoji;
+  if(!a){
 
+    card.classList.add(
+      "hidden"
+    );
 
-    document
-      .getElementById("awardName")
-      .textContent=
-
-        award.user+
-        ": "+
-        award.name;
-
-
-    document
-      .getElementById("awardDesc")
-      .textContent=
-        award.desc;
+    return;
 
   }
-);
 
 
-/* ====================================
-   FRESH CELEBRATION
-==================================== */
+  card.classList.remove(
+    "hidden"
+  );
 
-function freshCelebration(){
 
-  const pieces=[
-    "🫧",
-    "✨",
-    "☁️",
-    "🧦",
-    "👕",
-    "🩲",
-    "💧"
+  document
+    .getElementById("award")
+    .innerHTML=
+
+    `
+    <div style="font-size:44px">
+      ${a.emoji}
+    </div>
+
+    <div style="font-size:20px;font-weight:900">
+      ${a.user}: ${a.name}
+    </div>
+
+    <div class="muted"
+         style="margin-top:6px">
+      ${a.desc}
+    </div>
+    `;
+
+});
+
+
+/* CELEBRATION */
+
+function celebrate(){
+
+  const icons=[
+    "🎪","🫧","✨","🧦",
+    "🦖","⚡","🤡","⭕"
   ];
 
 
-  for(
-    let i=0;
-    i<30;
-    i++
-  ){
+  for(let i=0;i<28;i++){
 
     const el=
       document.createElement(
@@ -2352,44 +1920,34 @@ function freshCelebration(){
       );
 
 
-    el.className=
-      "freshBurst";
-
+    el.className="fall";
 
     el.textContent=
-      randomFrom(
-        pieces
-      );
+      randomFrom(icons);
 
 
     el.style.left=
-      Math.random()*
-      100+
+      Math.random()*100+
       "vw";
 
 
     el.style.fontSize=
-      (
-        15+
-        Math.random()*18
-      )+
+      15+
+      Math.random()*18+
       "px";
 
 
     el.style.animationDelay=
-      Math.random()*
-      .7+
+      Math.random()*.7+
       "s";
 
 
-    document.body.appendChild(
-      el
-    );
+    document.body.appendChild(el);
 
 
     setTimeout(
       ()=>el.remove(),
-      4200
+      4000
     );
 
   }
@@ -2397,12 +1955,9 @@ function freshCelebration(){
 }
 
 
-/* ====================================
-   INITIAL
-==================================== */
+/* INITIAL */
 
-document
-.getElementById("freeMessage")
+document.getElementById("freeMessage")
 .textContent=
   randomFrom(freePhrases);
 
